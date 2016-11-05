@@ -2,32 +2,17 @@
 -- Authors: xkondu00, xkrajn02
 
 -- smazani puvodnich tabulek
+-- zalezi na poradi !!!
 
-DROP TABLE POJISTOVNA CASCADE CONSTRAINT;
-DROP TABLE PACIENT CASCADE CONSTRAINT;
-DROP TABLE EXTERNI CASCADE CONSTRAINT;
-DROP TABLE VYKON CASCADE CONSTRAINT;
-DROP TABLE TERMIN CASCADE CONSTRAINT;
-DROP TABLE FAKTURA CASCADE CONSTRAINT;
-DROP TABLE LEK CASCADE CONSTRAINT;
-DROP TABLE TERMIN_VYKON CASCADE CONSTRAINT;
-DROP TABLE TERMIN_LEK CASCADE CONSTRAINT;
-
---- smazani puvodnich counteru
-
-DROP SEQUENCE extern_seq;
-DROP SEQUENCE vykon_seq;
-DROP SEQUENCE termin_seq;
-DROP SEQUENCE faktura_seq;
-DROP SEQUENCE lek_seq;
-
---- inicializace counteru
-
-CREATE SEQUENCE extern_seq;
-CREATE SEQUENCE vykon_seq;
-CREATE SEQUENCE termin_seq;
-CREATE SEQUENCE faktura_seq;
-CREATE SEQUENCE lek_seq;
+DROP TABLE TERMIN_VYKON;
+DROP TABLE TERMIN_LEK;
+DROP TABLE EXTERNI;
+DROP TABLE VYKON;
+DROP TABLE FAKTURA;
+DROP TABLE LEK;
+DROP TABLE TERMIN;
+DROP TABLE PACIENT;
+DROP TABLE POJISTOVNA;
 
 -- vytvoreni tabulek
 CREATE TABLE PACIENT (
@@ -41,129 +26,87 @@ CREATE TABLE PACIENT (
 	DATUM_NAROZENI	DATE NOT NULL,
 	EVIDOVAN_OD		DATE NOT NULL,
 	ID_POJISTOVNA	CHAR(3) NOT NULL,
-	CHECK( round(ID_RC/11.0) = ID_RC/11.0 )
+	CHECK( round(ID_RC/11.0) = ID_RC/11.0 ),
+	PRIMARY KEY (ID_RC)
 );
 
 CREATE TABLE POJISTOVNA (
 	ID_CP			CHAR(3) NOT NULL,
-	JMENO			VARCHAR(50) NOT NULL
+	JMENO			VARCHAR(50) NOT NULL,
+	PRIMARY KEY (ID_CP)
 );
 
 CREATE TABLE EXTERNI (
-	ID_VYSETRENI	INT NOT NULL,
+	ID_VYSETRENI	INT NOT NULL AUTO_INCREMENT,
 	DATUM 			DATE NOT NULL,
 	NAZEV			VARCHAR(50) NOT NULL,
 	VYSLEDKY		VARCHAR(1024) NOT NULL,
-	ID_PACIENT		CHAR(10) NOT NULL
+	ID_PACIENT		CHAR(10) NOT NULL,
+	PRIMARY KEY (ID_VYSETRENI)
 );
 
 CREATE TABLE VYKON (
-	ID_VYKONU		INT NOT NULL,
+	ID_VYKONU		INT NOT NULL AUTO_INCREMENT,
 	NAZEV_VYKONU	VARCHAR(30) NOT NULL,
-	EXPIRACE		INT NULL
+	EXPIRACE		INT NULL,
+	PRIMARY KEY (ID_VYKONU)
 );
 
 CREATE TABLE TERMIN (
-	ID_TERMINU		INT NOT NULL,
+	ID_TERMINU		INT NOT NULL AUTO_INCREMENT,
 	DATUM_CAS 		TIMESTAMP NOT NULL,
 	VYKONANE 		CHAR(1) NOT NULL,
 	ZPRAVA			VARCHAR(1024) NOT NULL,
 	ID_PACIENT		CHAR(10) NOT NULL,
-	CHECK (VYKONANE in (0,1))
+	CHECK (VYKONANE in (0,1)),
+	PRIMARY KEY (ID_TERMINU)
 );
 
 CREATE TABLE LEK (
-	ID_LEKU			INT NOT NULL,
+	ID_LEKU			INT NOT NULL AUTO_INCREMENT,
 	NAZEV			VARCHAR(30) NOT NULL,
 	DRUH			VARCHAR(30) NOT NULL,
-	POPIS 			VARCHAR(256) NOT NULL
+	POPIS 			VARCHAR(256) NOT NULL,
+	PRIMARY KEY (ID_LEKU)
 );
 
 CREATE TABLE FAKTURA (
-	ID_FAKTURY		INT NOT NULL,
+	ID_FAKTURY		INT NOT NULL AUTO_INCREMENT,
 	DATUM 			DATE NOT NULL,
 	CENA			INT NULL,
 	DOPLATEK		INT NULL,
-	ID_TERMINU		INT NOT NULL
+	ID_TERMINU		INT NOT NULL,
+	PRIMARY KEY (ID_FAKTURY)
 );
 
 CREATE TABLE TERMIN_VYKON (
 	ID_TERMINU		INT NOT NULL,
-	ID_VYKONU		INT NOT NULL
+	ID_VYKONU		INT NOT NULL,
+	PRIMARY KEY (ID_TERMINU, ID_VYKONU)
 );
 
 CREATE TABLE TERMIN_LEK (
 	ID_TERMINU		INT NOT NULL,
 	ID_LEKU			INT NOT NULL,
-	POCET_BALENI	INT NOT NULL
+	POCET_BALENI	INT NOT NULL,
+	PRIMARY KEY (ID_TERMINU, ID_LEKU)
 );
--- -----------------------------------
--- -----------TRIGGERY----------------
--- -----------------------------------
--- rodne cislo
-CREATE OR REPLACE TRIGGER RODNE_CISLO
-  BEFORE INSERT OR UPDATE OF ID_RC ON PACIENT
-  FOR EACH ROW
-DECLARE
-  RC PACIENT.ID_RC%TYPE;
-  FIRST_SIX INTEGER;
-  ALL_TEN INTEGER;
-  MESIC INTEGER;
-  DATE_CHECH DATE;
-BEGIN
-  RC:= :NEW.ID_RC;
-  FIRST_SIX:= TO_NUMBER(SUBSTR(RC, 1, 6));
-  MESIC:= TO_NUMBER(SUBSTR(RC, 3, 2));
-  ALL_TEN:= TO_NUMBER(RC); -- FAIL: kdyz nejsou vse cisla
-  IF(MESIC > 49) THEN -- pro zeny se odecte 50 na porovnani data
-    FIRST_SIX:= FIRST_SIX - 5000;
-  END IF;
-  DATE_CHECH:= TO_DATE(FIRST_SIX,'YYMMDD'); -- FAIL: kdyz kdyz neni validni datum
-  IF(round(RC/11.0) <> RC/11.0) THEN
-	  -- FAIL: kdyz neni delitelne 11
-    Raise_Application_Error (-20001, 'Rodne cislo neni delitelne 11');
-  END IF;
-END RODNE_CISLO ;
-/
--- AUTOINKREMENTACE ID v tabulce LEK
--- pouze pokud NULL, kdyz zadana tak se pouzije
-CREATE OR REPLACE TRIGGER ID_LEKU_INC
-  BEFORE INSERT OR UPDATE OF ID_LEKU ON LEK
-  FOR EACH ROW
-DECLARE
-  ID_NEW INTEGER;
-BEGIN
-  ID_NEW:= :NEW.ID_LEKU;
-  IF (ID_NEW is NULL) THEN
-     :new.ID_LEKU := lek_seq.nextval;
-  END IF;
-END ID_LEKU_INC;
-/
-
--- vytvoreni primarnich klicu
-ALTER TABLE PACIENT ADD CONSTRAINT PK_PACIENT PRIMARY KEY (ID_RC);
-ALTER TABLE POJISTOVNA ADD CONSTRAINT PK_POJISTOVNA PRIMARY KEY (ID_CP);
-ALTER TABLE EXTERNI ADD CONSTRAINT PK_EXTERNI PRIMARY KEY (ID_VYSETRENI);
-ALTER TABLE VYKON ADD CONSTRAINT PK_VYKON PRIMARY KEY (ID_VYKONU);
-ALTER TABLE TERMIN ADD CONSTRAINT PK_TERMIN PRIMARY KEY (ID_TERMINU);
-ALTER TABLE LEK ADD CONSTRAINT PK_LEK PRIMARY KEY (ID_LEKU);
-ALTER TABLE FAKTURA ADD CONSTRAINT PK_FAKTURA PRIMARY KEY (ID_FAKTURY);
 
 -- zarizeni unikatnich hodnot
 ALTER TABLE TERMIN ADD CONSTRAINT UQ_DATUM_TERMINU UNIQUE (DATUM_CAS);
 
 -- pridani cizich klicu 1:N
 ALTER TABLE PACIENT ADD CONSTRAINT FK_POJISTOVNA_PACIENT FOREIGN KEY (ID_POJISTOVNA) REFERENCES POJISTOVNA(ID_CP);
-ALTER TABLE EXTERNI ADD CONSTRAINT FK_PACIENT_EXTERNI FOREIGN KEY (ID_PACIENT) REFERENCES PACIENT;
-ALTER TABLE TERMIN ADD CONSTRAINT FK_PACIENT_TERMIN  FOREIGN KEY (ID_PACIENT) REFERENCES PACIENT;
-ALTER TABLE FAKTURA ADD CONSTRAINT FK_TERMIN_FAKTURA FOREIGN KEY (ID_TERMINU) REFERENCES TERMIN;
+ALTER TABLE EXTERNI ADD CONSTRAINT FK_PACIENT_EXTERNI FOREIGN KEY (ID_PACIENT) REFERENCES PACIENT(ID_RC);
+ALTER TABLE TERMIN ADD CONSTRAINT FK_PACIENT_TERMIN  FOREIGN KEY (ID_PACIENT) REFERENCES PACIENT(ID_RC);
+ALTER TABLE FAKTURA ADD CONSTRAINT FK_TERMIN_FAKTURA FOREIGN KEY (ID_TERMINU) REFERENCES TERMIN(ID_TERMINU);
 
 -- pridani cizich klicu N:M
-ALTER TABLE TERMIN_VYKON ADD CONSTRAINT FK_TERMIN_VYKON FOREIGN KEY (ID_TERMINU) REFERENCES TERMIN;
-ALTER TABLE TERMIN_VYKON ADD CONSTRAINT FK_VYKON_TERMIN FOREIGN KEY (ID_VYKONU) REFERENCES VYKON;
+ALTER TABLE TERMIN_VYKON ADD CONSTRAINT FK_TERMIN_VYKON FOREIGN KEY (ID_TERMINU) REFERENCES TERMIN(ID_TERMINU);
+ALTER TABLE TERMIN_VYKON ADD CONSTRAINT FK_VYKON_TERMIN FOREIGN KEY (ID_VYKONU) REFERENCES VYKON(ID_VYKONU);
 --
-ALTER TABLE TERMIN_LEK ADD CONSTRAINT FK_LEK_TERMIN FOREIGN KEY (ID_LEKU) REFERENCES LEK;
-ALTER TABLE TERMIN_LEK ADD CONSTRAINT FK_TERMIN_LEK FOREIGN KEY (ID_TERMINU) REFERENCES TERMIN;
+ALTER TABLE TERMIN_LEK ADD CONSTRAINT FK_LEK_TERMIN FOREIGN KEY (ID_LEKU) REFERENCES LEK(ID_LEKU);
+ALTER TABLE TERMIN_LEK ADD CONSTRAINT FK_TERMIN_LEK FOREIGN KEY (ID_TERMINU) REFERENCES TERMIN(ID_TERMINU);
 
 -- vkladani zaznamu do tabulek
 INSERT INTO POJISTOVNA VALUES('111','Všeobecná zdravotní pojišťovna ČR');
@@ -174,51 +117,49 @@ INSERT INTO POJISTOVNA VALUES('209','Zaměstnanecká pojišťovna Škoda');
 INSERT INTO POJISTOVNA VALUES('211','Zdravotní pojišťovna ministerstva vnitra ČR');
 INSERT INTO POJISTOVNA VALUES('213','Revírní bratrská pokladna, zdrav. pojišťovna');
 
-INSERT INTO PACIENT VALUES ('8811050622', 'John', 'Doe', 'Kolejní', 9, 'Brno', '61205', TO_DATE('05111998','DD-MM-YYYY'), TO_DATE('05052001','DD-MM-YYYY'),'111');
-INSERT INTO PACIENT VALUES ('8811090629', 'Will', 'Smith', 'Palackého', 12, 'Praha', '61342',TO_DATE('09111998','DD-MM-YYYY'),TO_DATE('09022002','DD-MM-YYYY'),'201');
-INSERT INTO PACIENT VALUES ('8860030619', 'Jane', 'Doe', 'Kolejní', 9, 'Brno', '61205', TO_DATE('03101998','DD-MM-YYYY'), TO_DATE('10052001','DD-MM-YYYY'),'111');
-INSERT INTO PACIENT VALUES ('8660030621', 'Marge', 'Smith', 'Palackého', 12, 'Praha', '61342',TO_DATE('03101986','DD-MM-YYYY'),TO_DATE('09022002','DD-MM-YYYY'),'211');
+INSERT INTO PACIENT VALUES ('8811050622', 'John', 'Doe', 'Kolejní', 9, 'Brno', '61205', '19981105', '20010505','111');
+INSERT INTO PACIENT VALUES ('8811090629', 'Will', 'Smith', 'Palackého', 12, 'Praha', '61342','19981109','20020209','201');
+INSERT INTO PACIENT VALUES ('8860030619', 'Jane', 'Doe', 'Kolejní', 9, 'Brno', '61205', '19981003', '20010510','111');
+INSERT INTO PACIENT VALUES ('8660030621', 'Marge', 'Smith', 'Palackého', 12, 'Praha', '61342','19861003','20020209','211');
 
-INSERT INTO EXTERNI VALUES(extern_seq.nextval, SYSDATE, 'Oční vyšetrení' ,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811050622' );
-INSERT INTO EXTERNI VALUES(extern_seq.nextval, SYSDATE, 'Röntgen' ,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811090629' );
-INSERT INTO EXTERNI VALUES(extern_seq.nextval, SYSDATE, 'Počítačová tomografie' ,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811050622' );
-INSERT INTO EXTERNI VALUES(extern_seq.nextval, SYSDATE, 'Odběr plazmy' ,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8660030621' );
+INSERT INTO EXTERNI VALUES(NULL, CURDATE(), 'Oční vyšetrení' ,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811050622' );
+INSERT INTO EXTERNI VALUES(NULL, CURDATE(), 'Röntgen' ,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811090629' );
+INSERT INTO EXTERNI VALUES(NULL, CURDATE(), 'Počítačová tomografie' ,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811050622' );
+INSERT INTO EXTERNI VALUES(NULL, CURDATE(), 'Odběr plazmy' ,'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8660030621' );
 
-INSERT INTO VYKON VALUES(vykon_seq.nextval, 'Očkování', 365);
-INSERT INTO VYKON VALUES(vykon_seq.nextval, 'Prohlídka', 365);
-INSERT INTO VYKON VALUES(vykon_seq.nextval, 'Odběr krve', 182);
-INSERT INTO VYKON VALUES(vykon_seq.nextval, 'Předpis léku', NULL );
+INSERT INTO VYKON VALUES(NULL, 'Očkování', 365);
+INSERT INTO VYKON VALUES(NULL, 'Prohlídka', 365);
+INSERT INTO VYKON VALUES(NULL, 'Odběr krve', 182);
+INSERT INTO VYKON VALUES(NULL, 'Předpis léku', NULL );
 
-INSERT INTO TERMIN VALUES(termin_seq.nextval, TIMESTAMP '2016-04-01 09:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811050622');
-INSERT INTO TERMIN VALUES(termin_seq.nextval, TIMESTAMP '2016-04-01 10:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8660030621');
-INSERT INTO TERMIN VALUES(termin_seq.nextval, TIMESTAMP '2016-04-02 07:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8860030619');
-INSERT INTO TERMIN VALUES(termin_seq.nextval, TIMESTAMP '2016-04-02 08:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8660030621');
-INSERT INTO TERMIN VALUES(termin_seq.nextval, TIMESTAMP '2016-04-02 09:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811090629');
-INSERT INTO TERMIN VALUES(termin_seq.nextval, TIMESTAMP '2016-04-02 09:30:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811090629');
-INSERT INTO TERMIN VALUES(termin_seq.nextval, TIMESTAMP '2016-04-02 10:00:00', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8860030619');
-INSERT INTO TERMIN VALUES(termin_seq.nextval, TIMESTAMP '2016-04-03 10:00:00', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8660030621');
-INSERT INTO TERMIN VALUES(termin_seq.nextval, TIMESTAMP '2016-04-04 09:00:00', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8860030619');
+INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-01 09:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811050622');
+INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-01 10:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8660030621');
+INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 07:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8860030619');
+INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 08:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8660030621');
+INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 09:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811090629');
+INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 09:30:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811090629');
+INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 10:00:00', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8860030619');
+INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-03 10:00:00', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8660030621');
+INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-04 09:00:00', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8860030619');
 
 
-INSERT INTO LEK VALUES(lek_seq.nextval, 'ASPIRIN PROTECT 100','Analgetikum', 'tbl flm 4x2,5 mg');
-INSERT INTO LEK VALUES(lek_seq.nextval, 'UNASYN','Antibiotikum', 'tbl obd 12x375 mg');
-INSERT INTO LEK VALUES(lek_seq.nextval, 'Avandamet','Antidiabetikum', 'tbl flm 112 (4 mg/1000 mg)');
-INSERT INTO LEK VALUES(lek_seq.nextval, 'Dietetické potraviny','APROMIX','1x1000 g');
-INSERT INTO LEK VALUES(lek_seq.nextval, 'KLACID 500','Antibiotikum', 'tbl flm 14x500 mg');
-INSERT INTO LEK VALUES(lek_seq.nextval, 'OSPEN 1000','Antibiotikum', 'tbl obd 12x375 mg');
-INSERT INTO LEK VALUES(lek_seq.nextval, 'LEKOPTIN','Gynekologiká ', 'tbl flm 112 (4 mg/1000 mg)');
--- test triggeru
-INSERT INTO LEK VALUES(NULL, 'FRAMYKOIN','Antibiotikum','1x1000 g');
+INSERT INTO LEK VALUES(NULL, 'ASPIRIN PROTECT 100','Analgetikum', 'tbl flm 4x2,5 mg');
+INSERT INTO LEK VALUES(NULL, 'UNASYN','Antibiotikum', 'tbl obd 12x375 mg');
+INSERT INTO LEK VALUES(NULL, 'Avandamet','Antidiabetikum', 'tbl flm 112 (4 mg/1000 mg)');
+INSERT INTO LEK VALUES(NULL, 'Dietetické potraviny','APROMIX','1x1000 g');
+INSERT INTO LEK VALUES(NULL, 'KLACID 500','Antibiotikum', 'tbl flm 14x500 mg');
+INSERT INTO LEK VALUES(NULL, 'OSPEN 1000','Antibiotikum', 'tbl obd 12x375 mg');
+INSERT INTO LEK VALUES(NULL, 'LEKOPTIN','Gynekologiká ', 'tbl flm 112 (4 mg/1000 mg)');
 
-INSERT INTO FAKTURA VALUES(faktura_seq.nextval, TO_DATE('01042016','DD-MM-YYYY'), 800, 0, 1);
-INSERT INTO FAKTURA VALUES(faktura_seq.nextval, TO_DATE('02042016','DD-MM-YYYY'), 600, 300, 2);
-INSERT INTO FAKTURA VALUES(faktura_seq.nextval, TO_DATE('02042016','DD-MM-YYYY'), 200, 0, 3);
-INSERT INTO FAKTURA VALUES(faktura_seq.nextval, TO_DATE('02042016','DD-MM-YYYY'), 1000, 150, 4);
-INSERT INTO FAKTURA VALUES(faktura_seq.nextval, TO_DATE('02042016','DD-MM-YYYY'), 900, 0, 5);
-INSERT INTO FAKTURA VALUES(faktura_seq.nextval, TO_DATE('03042016','DD-MM-YYYY'), 600, 300, 6);
-INSERT INTO FAKTURA VALUES(faktura_seq.nextval, TO_DATE('03042016','DD-MM-YYYY'), 400, 300, 7);
-INSERT INTO FAKTURA VALUES(faktura_seq.nextval, TO_DATE('04042016','DD-MM-YYYY'), 1000, 150, 8);
-INSERT INTO FAKTURA VALUES(faktura_seq.nextval, TO_DATE('04042016','DD-MM-YYYY'), 1000, 150, 9);
+INSERT INTO FAKTURA VALUES(NULL, '20160401', 800, 0, 1);
+INSERT INTO FAKTURA VALUES(NULL, '20160402', 600, 300, 2);
+INSERT INTO FAKTURA VALUES(NULL, '20160402', 200, 0, 3);
+INSERT INTO FAKTURA VALUES(NULL, '20160402', 1000, 150, 4);
+INSERT INTO FAKTURA VALUES(NULL, '20160402', 900, 0, 5);
+INSERT INTO FAKTURA VALUES(NULL, '20160403', 600, 300, 6);
+INSERT INTO FAKTURA VALUES(NULL, '20160403', 400, 300, 7);
+INSERT INTO FAKTURA VALUES(NULL, '20160404', 1000, 150, 8);
+INSERT INTO FAKTURA VALUES(NULL, '20160404', 1000, 150, 9);
 
 INSERT INTO TERMIN_VYKON VALUES(1,3);
 INSERT INTO TERMIN_VYKON VALUES(2,1);
@@ -255,9 +196,9 @@ SELECT * FROM TERMIN_LEK;
 
 
 -- vypis poctu navstev jednotlivych pacientu
-SELECT p.jmeno AS "Jméno", p.prijmeni AS "Příjmení", COUNT(n.id_pacient) navstevy
-FROM PACIENT P LEFT JOIN termin n ON n.id_pacient = p.id_rc
-GROUP BY p.jmeno, p.prijmeni
+SELECT P.jmeno AS "Jméno", P.prijmeni AS "Příjmení", COUNT(N.id_pacient) navstevy
+FROM PACIENT P LEFT JOIN TERMIN N ON N.id_pacient = p.id_rc
+GROUP BY P.jmeno, P.prijmeni
 ORDER BY navstevy DESC;
 
 -- vypis pacientu kterym byli predepsany 2 a vice baleni antibiotik
@@ -393,7 +334,7 @@ GRANT ALL ON pojistovnaNahled to XKRAJN02;
 -- vypis materializovaneho pohledu
 SELECT * FROM pojistovnaNahled;
 -- pridani nove faktury
-INSERT INTO FAKTURA VALUES(faktura_seq.nextval, TO_DATE('08082016','DD-MM-YYYY'), 500, 200, 9);
+INSERT INTO FAKTURA VALUES(NULL, '20160808', 500, 200, 9);
 COMMIT;
 -- znovu vypis materializovaneho pohledu, mel by byt pridan zaznam
 SELECT * FROM pojistovnaNahled;
