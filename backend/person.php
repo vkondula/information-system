@@ -17,10 +17,22 @@ class Employee{
         $this->doctor=$args["DOKTOR"];
     }
 
+    public function has_password(){
+        return !empty($this->password);
+    }
+
+    public static function verify_password($pass){
+        return true;
+    }
+
+    public function set_password($pass){
+        $db = new Database();
+        if(empty($pass)) return false;
+        return $db->set_password($this->email, $pass);
+    }
 }
 
 function log_in($email, $password){
-    # password must be already in sha256
     $db = new Database();
     $args = $db->log_in($email, $password);
     if (!$args){

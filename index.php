@@ -7,8 +7,14 @@ if (!isset($_SESSION["login_user"])){
     header("Location: login.php");
     exit;
 }
+$user = whois_logged();
+if (!$user->has_password()){
+    header("Location: password.php");
+    exit;
+}
 $s = new Site;
 $s->print_header();
+$s->print_error();
 $s->print_logout();
 echo "congratulation, you are logged in as:\n";
 $user = whois_logged();

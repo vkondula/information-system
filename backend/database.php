@@ -11,10 +11,16 @@ class Database extends DbConnection{
             $args = array($email);
         }
         $ans = $this->send_query($q, $args);
-        if (count($ans) == 1){
-            return $ans[0];
+        if ($ans->get_count() == 1){
+            return $ans->get_data()[0];
         }
         return null;
+    }
+
+    public function set_password($email, $pass){
+        $q = "UPDATE ZAMESTNANEC SET password = ? WHERE email = ?;";
+        $args = array(hash("sha256", $pass), $email);
+        return $this->send_query($q, $args)->get_count() == 1;
     }
 
 }
@@ -48,11 +54,28 @@ class DbConnection{
     }
 
     protected function send_query($query, $values){
-        $stmt = self::$conn->prepare($query);
-        if ($stmt->execute($values)) {
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-        return array();
+        return new Query($query, $values, self::$conn);
     }
 
+}
+
+class Query{
+    private $stmt;
+    private $fetched;
+    private $conn;
+
+    public function __construct($query, $values, $conn){
+        $this->conn = $conn;
+        $this->stmt = $this->conn->prepare($query);
+        $this->stmt->execute($values);
+        $this->fetched = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function get_data(){
+        return $this->fetched;
+    }
+
+    public function get_count(){
+        return $this->stmt->rowCount();
+    }
 }

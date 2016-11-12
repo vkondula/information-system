@@ -19,7 +19,19 @@ class Site{
         include "log_form.php";
     }
 
+    public function print_password_form(){
+        include "pass_form.php";
+    }
+
     public function print_logout(){
         echo "<a href='../backend/log_out.php'>log out</a>";
+    }
+
+    public function print_error(){
+        if (!empty($_SESSION["error"])){
+            # todo: format me
+            echo $_SESSION["error"];
+            unset($_SESSION["error"]);
+        }
     }
 }
