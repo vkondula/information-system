@@ -25,11 +25,19 @@ if (!$user->has_password() and $title != "Změna hesla"){
         <div class="nav">
             <ul>
                 <li class="visits"><a <?php if($title == 'Kalendář') echo 'class="active"'?> href="calendar.php">Kalendář</a></li>
-                <li class="pacients"><a <?php if($title == 'Pacienti') echo 'class="active"'?> href="pacients.php">Pacienti</a></li>
+                <li class="patients"><a <?php if($title == 'Pacienti') echo 'class="active"'?> href="pacients.php">Pacienti</a></li>
                 <li class="drugs"><a <?php if($title == 'Léky') echo 'class="active"'?> href="drugs.php">Léky</a></li>
                 <li class="insurance"><a <?php if($title == 'Pojišťovny') echo 'class="active"'?> href="insurance.php">Pojišťovny</a></li>
                 <li class="bills"><a <?php if($title == 'Faktury') echo 'class="active"'?> href="bills.php">Faktury</a></li>
                 <li class="employee"><a <?php if($title == 'Zaměstnanci') echo 'class="active"'?> href="employee.php">Zaměstnanci</a></li>
+                <li class="user"><a>Martin</a>
+                    <ul class="submenu">
+                        <li><a href="#">Logout</a></li>
+                        <hr/>
+                        <li><a href="#">Change password</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </div>
     </header>
