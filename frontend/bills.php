@@ -6,11 +6,11 @@
     <header>
         <div class="nav">
             <ul>
-                <li class="visits"><a class="active" href="#">Návštevy</a></li>
+                <li class="visits"><a href="header.php">Návštevy</a></li>
                 <li class="patients"><a href="patients.php">Pacienti</a></li>
                 <li class="drugs"><a href="drugs.php">Lieky</a></li>
                 <li class="insurance"><a href="insurance.php">Poisťovne</a></li>
-                <li class="bills"><a href="bills.php">Faktúry</a></li>
+                <li class="bills"><a class="active" href="bills.php">Faktúry</a></li>
                 <li class="employee"><a href="employee.php">Zamestnanec</a></li>
             </ul>
         </div>
@@ -27,7 +27,7 @@
 
         </div>
         <div class="content">
-            <h1>Zoznam návštev</h1>
+            <h1>Bills</h1>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non est mattis, malesuada lorem eget, euismod sem. Vestibulum pharetra elementum mollis. Suspendisse ac molestie justo, quis porta odio. Duis bibendum mauris a turpis mollis rhoncus. Proin in mollis lectus. Ut hendrerit felis at mauris ornare scelerisque. Duis molestie pulvinar nunc ac sollicitudin. Nullam a libero at ligula interdum mattis. Sed pharetra libero in orci cursus, at placerat urna euismod. Donec ultrices nulla sed arcu bibendum, sed ornare nisi vehicula. Fusce consectetur elit suscipit, hendrerit magna et, fermentum erat. Cras tempus iaculis congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu ullamcorper neque. Donec nulla odio, consequat at lacus ultricies, laoreet ultrices arcu. Proin lobortis, est sagittis imperdiet pretium, lectus nisl euismod dolor, et convallis purus justo sed risus.
 
             Maecenas nisl libero, ultrices nec lectus non, accumsan rhoncus justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam dignissim eros non libero tempor convallis. Suspendisse placerat arcu sed lacinia fermentum. Proin mi orci, vestibulum sed porttitor at, sodales nec neque. Curabitur lacinia justo sed sapien volutpat, ut elementum dui iaculis. In hac habitasse platea dictumst. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac habitasse platea dictumst. Proin sem justo, porta a enim quis, pharetra feugiat diam.

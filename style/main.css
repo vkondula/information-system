@@ -12,7 +12,7 @@ body {
     margin: 0;
 }
 .nav li {
-    font-size: 1.5em;
+    font-size: 1em;
     line-height: 40px;
     height: 40px;
 }
@@ -51,6 +51,7 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
     display: block;
     text-align: center;
+    color: #444;
 }
 
 label{
@@ -60,32 +61,43 @@ label{
 }
 
 header{
+    border-bottom-style: solid;
+    border-color: #ffffff;
+    border-bottom-width: 4px;
+}
+
+.loginheader{
     color: white;
     text-align: center;
     vertical-align: center;
     background-color: #1391EA;
-    height: 50px;
-    font-size: 2em;
-    padding: 15px;
-    border-bottom-style: solid;
-    border-bottom-color: #ffffff;
-    border-bottom-width: 4px;
+    font-size: 1.5em;
+    height: 40px;
+    padding-top: 10px;
 }
 
 footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    margin-bottom: 0px;
+    margin-top: 10px;
     padding: 5px;
     background-color: #1391EA;
     text-align: center;
-    color:white;
+    color: white;
+}
+
+.plusbutton {
+    color: white;
+    background-color: #1391EA;
+    padding: 5px 5px;
+    margin: 8px;
+    width: auto;
+    border-width: 2px;
+    cursor: pointer;
+    font-size: 1em;
 }
 
 .loginbtn {
     color: white;
-    font-size: 1.5em;
     background-color: #1391EA;
     padding: 5px 5px;
     margin: 8px 0;
@@ -93,6 +105,39 @@ footer {
     cursor: pointer;
     height: 50px;
     width: 300px;
+    font-size: 1.5em;
+}
+
+.site {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 900px;
+    color: #444;
+    overflow: hidden;
+}
+
+.sidepanel{
+    float: left;
+    width: 200px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-style: solid;
+    border-color: #1391EA;
+    border-width: 4px;
+    padding: 10px ;
+}
+
+.content{
+    float: right;
+    width: 600px;
+    background-color: white;
+    color: black;
+    border-style: solid;
+    border-color: #1391EA;
+    border-width: 4px;
+    padding: 10px;
 }
 
 /* smaller screens */
@@ -105,5 +150,39 @@ footer {
         font-size: 1.4em;
         display: inline-block;
         margin-right: -4px;
+    }
+}
+
+/* smaller screens */
+@media screen and (max-width: 850px) {
+    .site {
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        width: auto;
+        color: #444;
+        overflow: hidden;
+    }
+
+    .sidepanel{
+        width: auto;
+        background-color: white;
+        color: black;
+        text-align: center;
+        border-style: solid;
+        border-color: #1391EA;
+        border-width: 4px;
+        padding: 10px ;
+    }
+
+    .content{
+        margin-top: 10px;
+        width: auto;
+        background-color: white;
+        color: black;
+        border-style: solid;
+        border-color: #1391EA;
+        border-width: 4px;
+        padding: 10px;
     }
 }

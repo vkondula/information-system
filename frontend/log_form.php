@@ -5,7 +5,7 @@
     <link rel='stylesheet' type='text/css' href='../style/main.css'/>
     <title>Prihlásenie</title>
     <header>
-        Prihlásenie
+        <div class="loginheader">Prihlásenie</div>
     </header>
 </head>
 
