@@ -154,14 +154,12 @@ footer {
 }
 
 /* smaller screens */
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 900px) {
     .site {
+        text-align: center;
         margin-top: 20px;
-        margin-left: auto;
-        margin-right: auto;
         width: auto;
         color: #444;
-        overflow: hidden;
     }
 
     .sidepanel{
@@ -172,12 +170,13 @@ footer {
         border-style: solid;
         border-color: #1391EA;
         border-width: 4px;
-        padding: 10px ;
+        padding: 10px;
     }
 
     .content{
-        margin-top: 10px;
+        float:left;
         width: auto;
+        margin-top: 10px;
         background-color: white;
         color: black;
         border-style: solid;
