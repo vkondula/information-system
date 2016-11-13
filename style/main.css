@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #c0e4fe;
+}
+
+.nav ul {
+    list-style: none;
+    background-color: #1391EA;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+.nav li {
+    font-size: 1.5em;
+    line-height: 40px;
+    height: 40px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    transition: .3s background-color;
+}
+
+.nav a:hover {
+    background-color: #62bcfa;
+}
+
+.nav a.active {
+    background-color: #c0e4fe;
+    color: #444;
+    cursor: default;
+}
+
+.container {
+    padding: 16px;
+    text-align: center;
+}
+
+.center {
+    margin: auto;
+    padding: 10px;
+}
+
+input[type=text], input[type=password] {
+    margin: auto;
+    font-size: 1.5em;
+    border: none;
+    box-sizing: border-box;
+    display: block;
+    text-align: center;
+}
+
+label{
+    padding: auto;
+    font-size: 1.5em;
+    margin: 15px 15px;
+}
+
+header{
+    color: white;
+    text-align: center;
+    vertical-align: center;
+    background-color: #1391EA;
+    height: 50px;
+    font-size: 2em;
+    padding: 15px;
+    border-bottom-style: solid;
+    border-bottom-color: #ffffff;
+    border-bottom-width: 4px;
+}
+
+footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 5px;
+    background-color: #1391EA;
+    text-align: center;
+    color:white;
+}
+
+.loginbtn {
+    color: white;
+    font-size: 1.5em;
+    background-color: #1391EA;
+    padding: 5px 5px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    height: 50px;
+    width: 300px;
+}
+
+/* smaller screens */
+@media screen and (min-width: 600px) {
+    .nav li {
+        width: 160px;
+        border-bottom: none;
+        height: 50px;
+        line-height: 50px;
+        font-size: 1.4em;
+        display: inline-block;
+        margin-right: -4px;
+    }
+}
