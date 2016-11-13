@@ -15,7 +15,7 @@ $password2 = $_POST["password2"];
 
 if ($password1 != $password2) {
     $_SESSION["error"] = "Hesla se liší.";
-    header("Location: ../password.php");
+    header("Location: ../frontend/pass_form.php");
     exit;
 }
 
@@ -26,10 +26,10 @@ if ($user->verify_password($password1)) {
         header("Location: ../index.php");
     } else {
         $_SESSION["error"] = "Heslo nelze nastavit.";
-        header("Location: ../password.php");
+        header("Location: ../frontend/pass_form.php");
     }
 } else {
     $_SESSION["error"] = "Heslo není dostatečně silné.";
-    header("Location: ../password.php");
+    header("Location: ../frontend/pass_form.php");
     exit;
 }

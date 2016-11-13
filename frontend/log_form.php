@@ -1,15 +1,25 @@
+<?php
+session_start();
+unset($_SESSION["login_user"]);
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='UTF-8'>
     <link rel='stylesheet' type='text/css' href='../style/main.css'/>
-    <title>Prihlásenie</title>
+    <title>Přihlášení</title>
     <header>
-        <div class="loginheader">Prihlásenie</div>
+        <div class="loginheader">Přihlášení</div>
     </header>
 </head>
 
 <body>
+<?php
+if (!empty($_SESSION["error"])){
+    echo $_SESSION["error"];
+    unset($_SESSION["error"]);
+}
+?>
 <form action="../backend/log_page.php" method="post">
     <div class="container">
         <div class="center">
@@ -22,16 +32,13 @@
             <label><b>Password</b></label>
         </div>
         <div class="center">
-            <input type="password" placeholder="Enter Password" name="password" required>
+            <input type="password" placeholder="Enter Password" name="password">
         </div>
         <div class="center">
             <button class="loginbtn" type="submit">Login</button>
         </div>
     </div>
 </form>
-</body>
-<footer>
-    created for ISS 2016 ©
-    <a href="mailto:vkondula@gmail.com"> vkondula@gmail.com</a>
-    <a href="mailto:krajnakmatto@gmail.com"> krajnakmatto@gmail.com</a>
-</footer>
+<?php
+include "footer.php";
+?>

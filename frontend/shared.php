@@ -12,7 +12,7 @@ class Site{
     }
 
     public function print_footer(){
-        echo "</body></html>";
+        include "footer.php";
     }
 
     public function print_login_form(){
