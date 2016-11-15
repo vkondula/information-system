@@ -12,22 +12,34 @@ include "header.php";
 
     </div>
     <div class="content">
-        <h1>Patient list</h1>
-        <table>
-            <tr>
-                <td>RC</td>
-                <td>Name</td>
-                <td>Surname</td>
-                <td>Insurance</td>
-                <td>Address</td>
-                <td>Address num</td>
-                <td>City</td>
-                <td>Birthdate</td>
-                <td>Since</td>
-            </tr>
-        </table>
+        <div>
+            <h1>Pacient</h1>
+            <table>
+                <tr>
+                    <td>RC</td>
+                    <td>Name</td>
+                    <td>Surname</td>
+                    <td>Insurance</td>
+                    <td>Address</td>
+                    <td>Address num</td>
+                    <td>City</td>
+                    <td>Birthdate</td>
+                    <td>Since</td>
+                </tr>
+            </table>
+            <hr/>
+        </div>
+        <div>
+            <h1>Správa</h1>
+            <hr/>
+        </div>
+        <div>
+            <h1>Léky</h1>
+            <hr/>
+        </div>
+        <div>
+            <h1>Faktura</h1>
+            <hr/>
+        </div>
     </div>
 </div>
-<?php
-include "footer.php";
-?>

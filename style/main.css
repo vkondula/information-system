@@ -11,10 +11,10 @@ body {
     padding: 0;
     margin: 0;
 }
+
 .nav li {
-    font-size: 1em;
-    line-height: 40px;
-    height: 40px;
+    line-height: 30px;
+    height: 30px;
 }
 
 .nav a {
@@ -44,22 +44,25 @@ body {
     padding: 10px;
 }
 
-.submenu {
+#submenu {
     position: absolute;
     display: none;
-    font-size: 0.5em;
-    padding: 10px;
-    margin: 10px;
-    border-style: solid;
-    border-color: white;
-    border-width: 1px;
 }
 
-.user:hover .submenu {
+.submenu_item {
+    height: 40px;
+    font-size: 0.75em;
+    padding: 5px;
+}
+
+.user:hover #submenu {
     display: block;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 2px;
 }
 
-.submenu a:hover {
+#submenu a:hover {
     color: black;
 }
 
@@ -104,7 +107,7 @@ footer {
     color: white;
 }
 
-.plusbutton {
+#plusbutton {
     color: white;
     background-color: #1391EA;
     padding: 5px 5px;
@@ -115,7 +118,7 @@ footer {
     font-size: 1em;
 }
 
-.loginbtn {
+#loginbtn {
     color: white;
     background-color: #1391EA;
     padding: 5px 5px;
@@ -163,11 +166,11 @@ footer {
 /* smaller screens */
 @media screen and (min-width: 600px) {
     .nav li {
-        width: 160px;
+        width: 120px;
         border-bottom: none;
-        height: 50px;
-        line-height: 50px;
-        font-size: 1.4em;
+        height: 40px;
+        line-height: 40px;
+        font-size: 1em;
         display: inline-block;
         margin-right: -4px;
     }

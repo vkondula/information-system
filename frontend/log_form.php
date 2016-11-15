@@ -9,7 +9,7 @@ unset($_SESSION["login_user"]);
     <link rel='stylesheet' type='text/css' href='../style/main.css'/>
     <title>Přihlášení</title>
     <header>
-        <div class="loginheader">Přihlášení</div>
+        <div id="loginheader">Přihlášení</div>
     </header>
 </head>
 
@@ -35,7 +35,7 @@ if (!empty($_SESSION["error"])){
             <input type="password" placeholder="Enter Password" name="password">
         </div>
         <div class="center">
-            <button class="loginbtn" type="submit">Login</button>
+            <button id="loginbtn" type="submit">Login</button>
         </div>
     </div>
 </form>
