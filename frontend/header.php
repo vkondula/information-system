@@ -30,7 +30,8 @@ if (!$user->has_password() and $title != "Změna hesla"){
                 <li class="insurance"><a <?php if($title == 'Pojišťovny') echo 'class="active"'?> href="insurance.php">Pojišťovny</a></li>
                 <li class="bills"><a <?php if($title == 'Faktury') echo 'class="active"'?> href="bills.php">Faktury</a></li>
                 <li class="employee"><a <?php if($title == 'Zaměstnanci') echo 'class="active"'?> href="employee.php">Zaměstnanci</a></li>
-                <li class="user"><a>Martin</a>
+                <li class="user">
+                    <a>Martin</a>
                     <ul id="submenu">
                         <a class="submenu_item" href="#">Change password</a>
                         <a class="submenu_item" href="#">Logout</a>
