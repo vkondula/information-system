@@ -4,8 +4,7 @@ require_once("database.php");
 require_once ("person.php");
 # REDIRECT WHEN NOT LOGGED IN
 if (!isset($_SESSION["login_user"])){
-    var_dump(whois_logged());
-    //header("Location: ../login.php");
+    header("Location: ../frontend/log_form.php");
     exit;
 }
 $user = whois_logged();

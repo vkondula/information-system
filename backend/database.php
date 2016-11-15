@@ -53,7 +53,7 @@ class DbConnection{
         self::$conn = null;
     }
 
-    protected function send_query($query, $values){
+    public function send_query($query, $values){
         return new Query($query, $values, self::$conn);
     }
 
