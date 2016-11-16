@@ -7,7 +7,7 @@ require_once ("../backend/insurance.php");
 <div class="site">
     <div class="content">
         <h1>Pojišťovny</h1>
-            <table border="1">
+            <table>
                <tr>
                     <th>Číslo</th>
                     <th>Název</th>

@@ -37,7 +37,6 @@ if (!$user->has_password() and $title != "Změna hesla"){
                         <a class="submenu_item" href="#">Logout</a>
                     </ul>
                 </li>
-
             </ul>
         </div>
     </header>

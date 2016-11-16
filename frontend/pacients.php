@@ -2,6 +2,7 @@
 session_start();
 $title = "Pacienti";
 include "header.php";
+require_once ("../backend/patient.php");
 ?>
 <div class="site">
 
@@ -13,20 +14,23 @@ include "header.php";
     </div>
     <div class="content">
         <div>
-            <h1>Pacient</h1>
-            <table>
-                <tr>
-                    <td>RC</td>
-                    <td>Name</td>
-                    <td>Surname</td>
-                    <td>Insurance</td>
-                    <td>Address</td>
-                    <td>Address num</td>
-                    <td>City</td>
-                    <td>Birthdate</td>
-                    <td>Since</td>
-                </tr>
-            </table>
+            <?php
+            $patient = get_patient_info('8811050622');  //get patient info via birth code
+            //var_dump($patient);
+
+            if (count($patient) == 0) {
+                echo "<h1>Pacient nenalezen</h1>";
+                //TODO: back button
+            }
+            echo "<h2>".$patient[0]["name"]." ".$patient[0]["surname"]." </h2>";
+            echo "<div>R.č.: ".$patient[0]["rc"]." </div>";
+            echo "<div>".$patient[0]["birthdate"]." </div>";
+            echo "<div>".$patient[0]["insurance"]." </div>";
+            echo "<div>".$patient[0]["street"]." ".$patient[0]["str_number"]." </div>";
+            echo "<div>".$patient[0]["city"]." </div>";
+            echo "<div>".$patient[0]["postal_code"]." </div>";
+            echo "<div>Pacientem od: ".$patient[0]["evidence"]." </div>";
+            ?>
             <hr/>
         </div>
         <div>
