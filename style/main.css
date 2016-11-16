@@ -104,6 +104,15 @@ footer {
     border-top-width: 4px;
 }
 
+#userimg{
+    float: left;
+    padding-top: 10px;
+    padding-left: 15px;
+}
+
+#username{
+    padding-right: 15px;
+}
 hr {
     background-color: #1391EA;
     color: #1391EA;
