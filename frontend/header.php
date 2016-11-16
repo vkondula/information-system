@@ -34,8 +34,8 @@ if (!$user->has_password() and $title != "Změna hesla"){
                     <img id="userimg" src="../style/user.png" width="20" height="20"/>
                     <?php echo"<a id=\"username\">".$user->name."</a>"?>
                     <ul id="submenu">
-                        <a class="submenu_item" href="#">Change password</a>
-                        <a class="submenu_item" href="#">Logout</a>
+                        <a class="submenu_item" href="#">Změna hesla</a>
+                        <a class="submenu_item" href="#">Odhlášení</a>
                     </ul>
                 </li>
             </ul>
