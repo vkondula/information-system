@@ -113,6 +113,14 @@ footer {
 #username{
     padding-right: 15px;
 }
+
+#error{
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    color: red;
+}
+
 hr {
     background-color: #1391EA;
     color: #1391EA;

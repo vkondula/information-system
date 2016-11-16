@@ -16,7 +16,7 @@ unset($_SESSION["login_user"]);
 <body>
 <?php
 if (!empty($_SESSION["error"])){
-    echo $_SESSION["error"];
+    echo "<div id=\"error\"><b>".$_SESSION["error"]."</b></div>";
     unset($_SESSION["error"]);
 }
 ?>
