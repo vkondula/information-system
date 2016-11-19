@@ -106,9 +106,6 @@ CREATE TABLE ZAMESTNANEC (
 INSERT INTO ZAMESTNANEC VALUES ("vkondula@gmail.com", "Vaclav", "Kondula", NULL, 0);
 INSERT INTO ZAMESTNANEC VALUES ("mkrajnak@redhat.com", "Martin", "Krajnak", NULL, 1);
 
--- zarizeni unikatnich hodnot
-ALTER TABLE TERMIN ADD CONSTRAINT UQ_DATUM_TERMINU UNIQUE (DATUM_CAS);
-
 -- pridani cizich klicu 1:N
 ALTER TABLE PACIENT ADD CONSTRAINT FK_POJISTOVNA_PACIENT FOREIGN KEY (ID_POJISTOVNA) REFERENCES POJISTOVNA(ID_CP);
 ALTER TABLE EXTERNI ADD CONSTRAINT FK_PACIENT_EXTERNI FOREIGN KEY (ID_PACIENT) REFERENCES PACIENT(ID_RC);
@@ -151,7 +148,7 @@ INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-01 10:00:00', 1, 'Lorem ipsum
 INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 07:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8860030619');
 INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 08:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8660030621');
 INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 09:00:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811090629');
-INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 09:30:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811090629');
+INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 09:20:00', 1, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8811090629');
 INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-02 10:00:00', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8860030619');
 INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-03 10:00:00', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8660030621');
 INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-04 09:00:00', 0, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.','8860030619');
@@ -160,7 +157,7 @@ INSERT INTO TERMIN VALUES(NULL, TIMESTAMP '2016-04-04 09:00:00', 0, 'Lorem ipsum
 INSERT INTO LEK VALUES(NULL, 'ASPIRIN PROTECT 100','Analgetikum', 'tbl flm 4x2,5 mg');
 INSERT INTO LEK VALUES(NULL, 'UNASYN','Antibiotikum', 'tbl obd 12x375 mg');
 INSERT INTO LEK VALUES(NULL, 'Avandamet','Antidiabetikum', 'tbl flm 112 (4 mg/1000 mg)');
-INSERT INTO LEK VALUES(NULL, 'Dietetické potraviny','APROMIX','1x1000 g');
+INSERT INTO LEK VALUES(NULL, 'APROMIX','Dietetické potraviny','1x1000 g');
 INSERT INTO LEK VALUES(NULL, 'KLACID 500','Antibiotikum', 'tbl flm 14x500 mg');
 INSERT INTO LEK VALUES(NULL, 'OSPEN 1000','Antibiotikum', 'tbl obd 12x375 mg');
 INSERT INTO LEK VALUES(NULL, 'LEKOPTIN','Gynekologiká ', 'tbl flm 112 (4 mg/1000 mg)');

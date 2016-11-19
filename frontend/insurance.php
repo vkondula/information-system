@@ -25,12 +25,12 @@ require_once ("../backend/insurance.php");
                         echo '<td>
                           <form action="../backend/remove_insur.php" method="post">
                             <input name="delete_id" type="hidden" value='.$row["id"].'>
-                            <button>SMAZAT</button>
+                            <button onclick="return confirm(\'Opravdu chcete smazat záznam o pojišťovně?\')">SMAZAT</button>
                           </form>
                           </td>
                      ';
                     } else {
-                        echo "<td>------</td>";
+                        echo "<td></td>";
                     }
                     echo "</tr>";
                 }

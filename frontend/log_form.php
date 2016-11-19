@@ -26,13 +26,13 @@ if (!empty($_SESSION["error"])){
             <label><b>Email</b></label>
         </div>
         <div class="center">
-            <input type="text" placeholder="Enter Email" name="email" required>
+            <input type="text" class="center_input" placeholder="Enter Email" name="email" required>
         </div>
         <div class="center">
             <label><b>Password</b></label>
         </div>
         <div class="center">
-            <input type="password" placeholder="Enter Password" name="password">
+            <input type="password" class="center_input" placeholder="Enter Password" name="password">
         </div>
         <div class="center">
             <button id="loginbtn" type="submit">Login</button>

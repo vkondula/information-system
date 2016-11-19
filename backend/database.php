@@ -46,7 +46,10 @@ class DbConnection{
 
     private function create_connection(){
         $cmd = self::$engine.':dbname='.self::$dbname.";host=".self::$host.";charset=gbk";
-        self::$conn = new PDO($cmd, self::$user, self::$passwd);
+        self::$conn = new PDO(
+            $cmd, self::$user, self::$passwd,
+            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+        );
     }
 
     public function disconnect(){

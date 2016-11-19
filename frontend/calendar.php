@@ -4,13 +4,6 @@ $title = "Kalendář";
 include "header.php";
 ?>
 <div class="site">
-
-    <div class="sidepanel" >
-        <button >Nová návšteva</button>
-        <hr/>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non est mattis, malesuada lorem eget, euismod sem. Vestibulum pharetra elementum mollis. Suspendisse ac molestie justo, quis porta odio. Duis bibendum mauris a turpis mollis rhoncus. Proin in mollis lectus. Ut hendrerit felis at mauris ornare scelerisque. Duis molestie pulvinar nunc ac sollicitudin. Nullam a libero at ligula interdum mattis. Sed pharetra libero in orci cursus, at placerat urna euismod. Donec ultrices nulla sed arcu bibendum, sed ornare nisi vehicula. Fusce consectetur elit suscipit, hendrerit magna et, fermentum erat. Cras tempus iaculis congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu ullamcorper neque. Donec nulla odio, consequat at lacus ultricies, laoreet ultrices arcu. Proin lobortis, est sagittis imperdiet pretium, lectus nisl euismod dolor, et convallis purus justo sed risus.
-
-    </div>
     <div class="content">
         <h1>Seznam návštev</h1>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non est mattis, malesuada lorem eget, euismod sem. Vestibulum pharetra elementum mollis. Suspendisse ac molestie justo, quis porta odio. Duis bibendum mauris a turpis mollis rhoncus. Proin in mollis lectus. Ut hendrerit felis at mauris ornare scelerisque. Duis molestie pulvinar nunc ac sollicitudin. Nullam a libero at ligula interdum mattis. Sed pharetra libero in orci cursus, at placerat urna euismod. Donec ultrices nulla sed arcu bibendum, sed ornare nisi vehicula. Fusce consectetur elit suscipit, hendrerit magna et, fermentum erat. Cras tempus iaculis congue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu ullamcorper neque. Donec nulla odio, consequat at lacus ultricies, laoreet ultrices arcu. Proin lobortis, est sagittis imperdiet pretium, lectus nisl euismod dolor, et convallis purus justo sed risus.

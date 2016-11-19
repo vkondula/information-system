@@ -9,8 +9,85 @@ function get_patient_info($code){
     P.PSC AS  "postal_code", P.DATUM_NAROZENI AS  "birthdate", P.EVIDOVAN_OD AS  "evidence",
     P.ID_POJISTOVNA AS  "insurance"   
     FROM PACIENT P
-    WHERE P.ID_RC = '.$code.';
+    WHERE P.ID_RC = ?;
     ';
-    $q = $db->send_query($req, array());
+    $q = $db->send_query($req, array($code));
     return $q->get_data();
+}
+
+
+function get_patients($name=null){
+    if (!empty($name)){
+        $req = '
+            SELECT P.ID_RC AS  "id", P.JMENO AS  "fname", P.PRIJMENI AS "surname"
+            FROM PACIENT P
+            WHERE P.PRIJMENI LIKE ?;
+        ';
+        $vals = array("%".$name."%");
+    } else {
+        $req = 'SELECT P.ID_RC AS  "id", P.JMENO AS  "fname", P.PRIJMENI AS "surname" FROM PACIENT P ;';
+        $vals = array();
+    }
+    $db = new Database();
+    $q = $db->send_query($req, $vals);
+    return $q->get_data();
+}
+
+
+function get_last_visit($id){
+    $req = 'SELECT ID_TERMINU AS id
+        FROM TERMIN T INNER JOIN PACIENT P ON T.ID_PACIENT = P.ID_RC
+        WHERE P.ID_RC = ?
+        ORDER BY T.DATUM_CAS DESC
+        LIMIT 1;
+     ';
+    $db = new Database();
+    $q = $db->send_query($req, array($id));
+    $visits = $q->get_data();
+    if(empty($visits)) return null;
+    return $visits[0]["id"];
+}
+
+function get_all_visits($id){
+    $req = 'SELECT ID_TERMINU AS id, DATUM_CAS AS datetime
+        FROM TERMIN T INNER JOIN PACIENT P ON T.ID_PACIENT = P.ID_RC
+        WHERE P.ID_RC = ?
+        ORDER BY T.DATUM_CAS DESC;
+     ';
+    $db = new Database();
+    $q = $db->send_query($req, array($id));
+    return $q->get_data();
+}
+
+function get_visit_info($v){
+    $req = 'SELECT DATUM_CAS AS datetime, ZPRAVA AS report
+        FROM TERMIN
+        WHERE ID_TERMINU = ?
+     ';
+    $db = new Database();
+    $q = $db->send_query($req, array($v));
+    return $q->get_data();
+}
+
+function prescribed_drugs($v){
+    $req = 'SELECT L.NAZEV AS name, L.DRUH AS drug_type, T.ID_TERMINU AS id_term,
+        T.ID_LEKU AS id_drug, T.POCET_BALENI AS drug_count
+        FROM TERMIN_LEK T INNER JOIN LEK L ON T.ID_LEKU = L.ID_LEKU
+        WHERE T.ID_TERMINU = ?;
+     ';
+    $db = new Database();
+    $q = $db->send_query($req, array($v));
+    return $q->get_data();
+}
+
+function get_bill($v){
+    $req = 'SELECT DATUM AS b_date, CENA AS price, DOPLATEK AS extra,
+        ID_FAKTURY AS id_bill
+        FROM FAKTURA
+        WHERE ID_TERMINU = ?;
+     ';
+    $db = new Database();
+    $q = $db->send_query($req, array($v));
+    return $q->get_data();
+
 }
