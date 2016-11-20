@@ -88,6 +88,23 @@ body {
     color: #444;
 }
 
+.left_big_input {
+    margin: auto;
+    font-size: 1.5em;
+    border: none;
+    box-sizing: border-box;
+    text-align: left;
+    color: #444;
+}
+
+.left_input {
+    margin: auto;
+    border: none;
+    box-sizing: border-box;
+    text-align: left;
+    color: #444;
+}
+
 header{
     border-bottom-style: solid;
     border-color: #ffffff;

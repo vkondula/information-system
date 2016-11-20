@@ -33,22 +33,63 @@ include "header.php";
         </div>
         <div class="rightcontent">
             <div>
-                <?php
-                // TODO: naformatovat
-                echo "<h2>".$patient["name"]." ".$patient["surname"]." </h2>";
-                echo "<div>R.č.: ".$patient["rc"]." </div>";
-                echo "<div>".$patient["birthdate"]." </div>";
-                echo "<div>".$patient["insurance"]." </div>";
-                echo "<div>".$patient["street"]." ".$patient["str_number"]." </div>";
-                echo "<div>".$patient["city"]." </div>";
-                echo "<div>".$patient["postal_code"]." </div>";
-                echo "<div>Pacientem od: ".$patient["evidence"]." </div>";
-                ?>
-                <div align="right">
-                    <form action="../backend/pacient_remove.php" method="post">
-                        <input type="hidden" name="id_p" value="<?php echo $patient["rc"]; ?>">
-                        <button class="red_button" id="remove₋0" type="submit" onclick="return confirm('Opravdu chcete smazat všechny informace o pacientovi? Tato akce je nevratná.')">Smazat pacienta</button>
-                    </form>
+                <form action="../backend/save/pacient_change.php" method="post" id="pac_form">
+                    <div>
+                        <input class="center_input" placeholder="Jméno" type="text" name="fname" required value="<?php echo $patient["name"]; ?>">
+                        <input class="center_input" placeholder="Příjmení" type="text" name="surname" required value="<?php echo $patient["surname"]; ?>">
+                    </div>
+                    </br>
+                    <div>
+                        <div style="width: 50%; float:left" >
+                            <label><b>Rodné číslo:</b></label>
+                            <input class="left_input" type="text" name="rc" required value="<?php echo $patient["rc"]; ?>">
+                        </div>
+
+                        <div style="width: 50%; float:right">
+                            <label><b>Číslo pojišťovny:</b></label>
+                            <input class="left_input" type="number" name="insurance" min="0" required value="<?php echo $patient["insurance"]; ?>" style="width:100px">
+                        </div>
+                        </br style="clear:both;">
+                    </div>
+                    </br>
+                    <hr/>
+                    <h3>Trvalé bydliště</h3>
+                    <div>
+                        <div style="width: 50%; float:left" >
+                            <div>
+                                <label><b>Ulice:</b></label>
+                                <input class="left_input" type="text" name="street" required value="<?php echo $patient["street"]; ?>">
+                            </div>
+
+                            <div>
+                                <label><b>Číslo popisné:</b></label>
+                                <input class="left_input" type="text" name="str_number" required value="<?php echo $patient["str_number"]; ?>" style="width:100px">
+                            </div>
+                        </div>
+                        <div style="width: 50%; float:right">
+                            <div>
+                                <label><b>Město:</b></label>
+                                <input class="left_input" type="text" name="city" required value="<?php echo $patient["city"]; ?>">
+                            </div>
+                            <div>
+                                <label><b>PSČ:</b></label>
+                                <input class="left_input" type="number" name="postal_code" min="0" required value="<?php echo $patient["postal_code"]; ?>">
+                            </div>
+                        </div>
+                        </br style="clear:both;">
+                    </div>
+                </form>
+                <div>
+                    <div style="width: 50%; float:left" >
+                        <button form="pac_form" id="save₋8" type="submit">Uložit</button>
+                    </div>
+                    <div style="width: 50%; float:right" align="right">
+                        <form action="../backend/pacient_remove.php" method="post">
+                            <input type="hidden" name="id_p" value="<?php echo $patient["rc"]; ?>">
+                            <button class="red_button" id="remove₋0" type="submit" onclick="return confirm('Opravdu chcete smazat všechny informace o pacientovi? Tato akce je nevratná.')">Smazat pacienta</button>
+                        </form>
+                    </div>
+                    </br style="clear:both;">
                 </div>
             </div>
         </div>

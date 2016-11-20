@@ -30,6 +30,13 @@ class Employee{
         if(empty($pass)) return false;
         return $db->set_password($this->email, $pass);
     }
+
+    public function is_doctor(){
+        if ($this->doctor == 1 ){
+            return true;
+        }
+        return false;
+    }
 }
 
 function log_in($email, $password){

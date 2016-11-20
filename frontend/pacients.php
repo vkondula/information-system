@@ -24,6 +24,47 @@ require_once ("../backend/patient.php");
                 }
                 ?>
             </table>
+            <div>
+                <h4>Nový pacient</h4>
+                <form action="../backend/save/pacient_add.php" method="post">
+                    <div>
+                        <label><b>Jméno:</b></label>
+                        <input class="left_input" type="text" name="fname" required>
+                    </div>
+                    <div>
+                        <label><b>Příjmení:</b></label>
+                        <input class="left_input" type="text" name="surname" required>
+                    </div>
+                    <div>
+                        <label><b>Rodné číslo:</b></label>
+                        <input class="left_input" type="text" name="rc" required>
+                    </div>
+                    <div>
+                        <label><b>Číslo pojišťovny:</b></label>
+                        <input class="left_input" type="number" name="insurance" min="0" required>
+                    </div>
+                    <div>
+                        <label><b>Ulice:</b></label>
+                        <input class="left_input" type="text" name="street" required>
+                    </div>
+
+                    <div>
+                        <label><b>Číslo popisné:</b></label>
+                        <input class="left_input" type="text" name="str_number" required>
+                    </div>
+                    <div>
+                        <label><b>Město:</b></label>
+                        <input class="left_input" type="text" name="city" required>
+                    </div>
+                    <div>
+                        <label><b>PSČ:</b></label>
+                        <input class="left_input" type="number" name="postal_code" min="0" required>
+                    </div>
+                    <div>
+                        <button id="save₋10" type="submit">Uložit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 <?php

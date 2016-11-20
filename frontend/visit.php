@@ -49,7 +49,7 @@ function print_visit_info($v, $p){
         if (!empty($drugs)){
             drug_print($drugs);
         }
-        drug_form($v);
+        if (whois_logged()->is_doctor()) drug_form($v);
         ?>
     </div>
     <hr/>

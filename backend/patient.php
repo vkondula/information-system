@@ -21,11 +21,15 @@ function get_patients($name=null){
         $req = '
             SELECT P.ID_RC AS  "id", P.JMENO AS  "fname", P.PRIJMENI AS "surname"
             FROM PACIENT P
-            WHERE P.PRIJMENI LIKE ?;
+            WHERE P.PRIJMENI LIKE ?
+            ORDER BY P.PRIJMENI ASC;
         ';
         $vals = array("%".$name."%");
     } else {
-        $req = 'SELECT P.ID_RC AS  "id", P.JMENO AS  "fname", P.PRIJMENI AS "surname" FROM PACIENT P ;';
+        $req = '
+            SELECT P.ID_RC AS  "id", P.JMENO AS  "fname", P.PRIJMENI AS "surname"
+            FROM PACIENT P ORDER BY P.PRIJMENI ASC, P.JMENO ASC;
+         ';
         $vals = array();
     }
     $db = new Database();
