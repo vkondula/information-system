@@ -63,6 +63,12 @@ function print_visit_info($v, $p){
         bill_form($v);
         ?>
     </div>
+    <div align="right">
+        <form action="../backend/save/visit_remove.php" method="post">
+            <input type="hidden" name="id_p" value="<?php echo $p; ?>">
+            <button class="red_button" id="save₋0" type="submit" onclick="return confirm('Opravdu chcete smazat všechny informace o navštěvě? Tato akce je nevratná.')">Smazat návštěvu</button>
+        </form>
+    </div>
 </div>
 <?php
 }
@@ -84,7 +90,7 @@ function bill_print($bills){
            <td>
               <form action="../backend/save/visit_remove_bill.php"" method="post">
                 <input name="id_bill" type="hidden" value=' . $bill["id_bill"] . '>
-                <button onclick="return confirm(\'Opravdu chcete smazat záznam ?\')">SMAZAT</button>
+                <button onclick="return confirm(\'Opravdu chcete smazat záznam?\')">SMAZAT</button>
               </form>
           </td>';
         echo "</tr>";

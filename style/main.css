@@ -149,6 +149,17 @@ button {
     font-size: 1em;
 }
 
+.red_button {
+    color: white;
+    background-color: #983f1f;
+    padding: 5px 5px;
+    margin: 8px;
+    width: auto;
+    border-width: 2px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
 #loginbtn {
     color: white;
     background-color: #1391EA;
