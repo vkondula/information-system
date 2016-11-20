@@ -1,4 +1,6 @@
 <?php
+session_start();
+require_once("database.php");
 
 function get_bills($date){
     $req = 'SELECT F.DATUM AS b_date, F.CENA AS price, F.DOPLATEK AS extra,
