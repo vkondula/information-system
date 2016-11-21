@@ -32,7 +32,13 @@ if (!$user->has_password() and $title != "Změna hesla"){
 </head>
 
 <body>
-    <header>
+    <?php
+        if(isset($_SESSION["error"])){
+            echo "<script>alert('".$_SESSION["error"]."');</script>";
+            unset($_SESSION["error"]);
+        }
+    ?>
+        <header>
         <div class="nav">
             <ul>
                 <li class="visits"><a <?php if($title == 'Kalendář') echo 'class="active"'?> href="calendar.php">Kalendář</a></li>

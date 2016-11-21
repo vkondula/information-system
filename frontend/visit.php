@@ -30,9 +30,7 @@ function print_visit_info($v, $p){
     <hr/>
     <div>
         <h1>Zpráva</h1>
-        <textarea rows="10" cols="70" name="comment" form="report_form" maxlength="1023">
-        <?php echo $v_info["report"]; ?>
-        </textarea>
+        <textarea rows="10" cols="70" name="comment" form="report_form" maxlength="1023"><?php echo $v_info["report"]; ?></textarea>
         <form action="../backend/save/visit_report.php" method="post" id="report_form">
             <div>
                 <input type="hidden" name="id_v" value="<?php echo $v; ?>">

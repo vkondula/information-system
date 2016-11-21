@@ -93,5 +93,32 @@ function get_bill($v){
     $db = new Database();
     $q = $db->send_query($req, array($v));
     return $q->get_data();
+}
 
+function is_insurance_in_db($ins){
+    $req = 'SELECT ID_CP FROM POJISTOVNA WHERE ID_CP = ?';
+    $db = new Database();
+    $q = $db->send_query($req, array($ins));
+    return $q->get_count() == 1;
+}
+
+function is_rc_valid($rc){
+    if(filter_var((string)$rc, FILTER_VALIDATE_INT) === false) return false;
+    if($rc % 11 != 0) return false;
+    if(strlen((string)$rc) != 10) return false;
+    return true;
+}
+
+function is_rc_uniq($rc){
+    $req = 'SELECT ID_RC FROM PACIENT WHERE ID_RC = ?;';
+    $db = new Database();
+    $q = $db->send_query($req, array($rc));
+    return $q->get_count() == 0;
+}
+
+function is_all_set($post, $required){
+    foreach($required as $r){
+        if ($post[$r] == null) return false;
+    }
+    return true;
 }
