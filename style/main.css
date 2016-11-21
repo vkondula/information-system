@@ -98,9 +98,11 @@ body {
 }
 
 .left_input {
-    margin: auto;
-    border: none;
-    box-sizing: border-box;
+    border-width: 2px;
+    border-color: #1391EA;
+    margin: 5px;
+    height: 20px;
+    width: 50%;
     text-align: left;
     color: #444;
 }
@@ -166,6 +168,7 @@ button {
     font-size: 1em;
 }
 
+
 .red_button {
     color: white;
     background-color: #983f1f;
@@ -219,6 +222,7 @@ button {
     border-color: #1391EA;
     border-width: 4px;
     padding: 5px;
+    text-align: center;
 }
 
 .rightcontent{
@@ -232,6 +236,22 @@ button {
     padding: 5px;
 }
 
+#form-labels{
+    width: 50%;
+    float: left;
+    text-align: right;
+}
+
+.form-label{
+    margin: 10px;
+    height: 25px;
+}
+
+#forms{
+    width: 50%;
+    float: right;
+    text-align: left;
+}
 table {
     border-collapse: collapse;
     width: 100%;

@@ -6,7 +6,38 @@ require_once ("../backend/patient.php");
 ?>
     <div class="site">
         <div class="content">
-            <h1>Pacienti</h1>
+            <div>
+                <h1>Pacienti</h1>
+                <button class="add_new">Přidat nového pacienta</button>
+            </div>
+            <patient_form>
+                <h4>Nový pacient</h4>
+                <hr/>
+                <form action="../backend/save/pacient_add.php" method="post">
+                    <div id="form-labels">
+                        <div class="form-label"><b>Jméno:</b></div>
+                        <div class="form-label"><b>Příjmení:</b></div>
+                        <div class="form-label"><b>Rodné číslo:</b></div>
+                        <div class="form-label"><b>Číslo pojišťovny:</b></div>
+                        <div class="form-label"><b>Ulice:</b></div>
+                        <div class="form-label"><b>Číslo popisné:</b></div>
+                        <div class="form-label"><b>Město:</b></div>
+                        <div class="form-label"><b>PSČ:</b></div>
+                    </div>
+                    <div id="forms">
+                        <div><input class="left_input" type="text" name="fname" required></div>
+                        <div><input class="left_input" type="text" name="surname" required></div>
+                        <div><input class="left_input" type="text" name="rc" required></div>
+                        <div><input class="left_input" type="number" name="insurance" min="0" required></div>
+                        <div><input class="left_input" type="text" name="street" required></div>
+                        <div><input class="left_input" type="text" name="str_number" required></div>
+                        <div><input class="left_input" type="text" name="city" required></div>
+                        <div><input class="left_input" type="number" name="postal_code" min="0" required></div>
+                        <button id="save₋10" type="submit">Uložit</button>
+
+                    </div>
+                </form>
+            </patient_form>
             <table>
                 <tr>
                     <th>Příjmení</th>
@@ -23,48 +54,20 @@ require_once ("../backend/patient.php");
                     echo "</tr>";
                 }
                 ?>
-            </table>
-            <div>
-                <h4>Nový pacient</h4>
-                <form action="../backend/save/pacient_add.php" method="post">
-                    <div>
-                        <label><b>Jméno:</b></label>
-                        <input class="left_input" type="text" name="fname" required>
-                    </div>
-                    <div>
-                        <label><b>Příjmení:</b></label>
-                        <input class="left_input" type="text" name="surname" required>
-                    </div>
-                    <div>
-                        <label><b>Rodné číslo:</b></label>
-                        <input class="left_input" type="text" name="rc" required>
-                    </div>
-                    <div>
-                        <label><b>Číslo pojišťovny:</b></label>
-                        <input class="left_input" type="number" name="insurance" min="0" required>
-                    </div>
-                    <div>
-                        <label><b>Ulice:</b></label>
-                        <input class="left_input" type="text" name="street" required>
-                    </div>
 
-                    <div>
-                        <label><b>Číslo popisné:</b></label>
-                        <input class="left_input" type="text" name="str_number" required>
-                    </div>
-                    <div>
-                        <label><b>Město:</b></label>
-                        <input class="left_input" type="text" name="city" required>
-                    </div>
-                    <div>
-                        <label><b>PSČ:</b></label>
-                        <input class="left_input" type="number" name="postal_code" min="0" required>
-                    </div>
-                    <div>
-                        <button id="save₋10" type="submit">Uložit</button>
-                    </div>
-                </form>
-            </div>
+            </table>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    $("patient_form").hide();           // hide on start
+                    $("button").click(function(){       // listen for click
+                        $("patient_form").toggle("fast");     // toggle when clicked
+                    });
+                });
+            </script>
+
+
         </div>
     </div>
 <?php
