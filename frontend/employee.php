@@ -9,6 +9,39 @@ $doc = whois_logged()->is_doctor();
 <div class="site">
     <div class="content">
         <h1>Zaměstnanci</h1>
+        <?php
+        if($doc){
+            ?>
+            <div>
+                <button class="add_new">Přidat nového zaměstnance</button>
+            </div>
+            <add_form>
+                <h4>Nový zaměstnanec</h4>
+                <hr/>
+                <form action="../backend/save/emloyee_add.php" method="post">
+                    <div id="form-labels">
+                        <div class="form-label"><b>Jméno:</b></div>
+                        <div class="form-label"><b>Příjmení:</b></div>
+                        <div class="form-label"><b>Email:</b></div>
+                        <div class="form-label"><b>Zařazení:</b></div>
+                    </div>
+                    <div id="forms">
+                        <input class="left_input" type="text" name="fname" required>
+                        <input class="left_input" type="text" name="surname" required>
+                        <input class="left_input" type="text" name="email" required>
+                        <div>
+                            <select name="doctor">
+                                <option value="1">Doktor</option>
+                                <option value="0">Sestra</option>
+                            </select>
+                        </div>
+                        <button id="save₋11" type="submit">Uložit</button>
+                    </div>
+                </form>
+            </add_form>
+            <?php
+        }
+        ?>
         <table>
             <tr>
                 <th>email</th>
@@ -39,39 +72,7 @@ $doc = whois_logged()->is_doctor();
             }
             ?>
         </table>
-        <?php
-            if($doc){
-                ?>
-                <div>
-                    <h4>Nový zaměstnanec</h4>
-                    <form action="../backend/save/emloyee_add.php" method="post">
-                        <div>
-                            <label><b>Jméno:</b></label>
-                            <input class="left_input" type="text" name="fname" required>
-                        </div>
-                        <div>
-                            <label><b>Příjmení:</b></label>
-                            <input class="left_input" type="text" name="surname" required>
-                        </div>
-                        <div>
-                            <label><b>Email:</b></label>
-                            <input class="left_input" type="text" name="email" required>
-                        </div>
-                        <div>
-                            <label><b>Zařazení:</b></label>
-                            <select name="doctor">
-                                <option value="1">Doktor</option>
-                                <option value="0">Sestra</option>
-                            </select>
-                        </div>
-                        <div>
-                            <button id="save₋11" type="submit">Uložit</button>
-                        </div>
-                    </form>
-                </div>
-                <?php
-            }
-        ?>
+
     </div>
 </div>
 <?php

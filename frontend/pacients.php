@@ -10,7 +10,7 @@ require_once ("../backend/patient.php");
                 <h1>Pacienti</h1>
                 <button class="add_new">Přidat nového pacienta</button>
             </div>
-            <patient_form>
+            <add_form>
                 <h4>Nový pacient</h4>
                 <hr/>
                 <form action="../backend/save/pacient_add.php" method="post">
@@ -34,10 +34,9 @@ require_once ("../backend/patient.php");
                         <div><input class="left_input" type="text" name="city" required></div>
                         <div><input class="left_input" type="number" name="postal_code" min="0" required></div>
                         <button id="save₋10" type="submit">Uložit</button>
-
                     </div>
                 </form>
-            </patient_form>
+            </add_form>
             <table>
                 <tr>
                     <th>Příjmení</th>
@@ -56,18 +55,6 @@ require_once ("../backend/patient.php");
                 ?>
 
             </table>
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script>
-                $(document).ready(function(){
-                    $("patient_form").hide();           // hide on start
-                    $("button").click(function(){       // listen for click
-                        $("patient_form").toggle("fast");     // toggle when clicked
-                    });
-                });
-            </script>
-
-
         </div>
     </div>
 <?php

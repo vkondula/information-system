@@ -6,7 +6,29 @@ include "header.php";
 ?>
 <div class="site">
     <div class="content">
-        <h1>Léky</h1>
+        <div>
+            <h1>Léky</h1>
+            <button class="add_new">Přidat lék</button>
+        </div>
+        <add_form>
+            <h4>Přidat lék</h4>
+            <hr/>
+            <form action="../backend/save/drug_add.php" method="post">
+                <div id="form-labels">
+                    <div class="form-label"><b>Název:</b></div>
+                    <div class="form-label"><b>Typ:</b></div>
+                    <div class="form-label"><b>Popis:</b></div>
+                </div>
+                <div id="forms">
+                    <input class="left_input" type="text" name="name" required>
+                    <input class="left_input" type="text" name="drug_type" required>
+                    <input class="left_input" type="text" name="description" required>
+                    <div>
+                        <button id="save₋11" type="submit">Uložit</button>
+                    </div>
+                </div>
+            </form>
+        </add_form>
         <table>
             <tr>
                 <th>Jméno</th>
@@ -24,26 +46,6 @@ include "header.php";
             }
             ?>
         </table>
-        <div>
-            <h4>Přidat lék</h4>
-            <form action="../backend/save/drug_add.php" method="post">
-                <div>
-                    <label><b>Název:</b></label>
-                    <input class="left_input" type="text" name="name" required>
-                </div>
-                <div>
-                    <label><b>Typ:</b></label>
-                    <input class="left_input" type="text" name="drug_type" required>
-                </div>
-                <div>
-                    <label><b>Popis:</b></label>
-                    <input class="left_input" type="text" name="description" required>
-                </div>
-                <div>
-                    <button id="save₋11" type="submit">Uložit</button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 <?php

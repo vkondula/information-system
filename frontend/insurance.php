@@ -6,7 +6,28 @@ require_once ("../backend/insurance.php");
 ?>
 <div class="site">
     <div class="content">
-        <h1>Pojišťovny</h1>
+        <div>
+            <h1>Pojišťovny</h1>
+            <button class="add_new">Přidat Pojišťovnu</button>
+        </div>
+        <add_form>
+            <h4>Přidat Pojišťovnu</h4>
+            <hr/>
+            <form action="../backend/save/insurance_add.php" method="post">
+                <div id="form-labels">
+                    <div class="form-label"><b>Číslo:</b></div>
+                    <div class="form-label"><b>Název:</b></div>
+                </div>
+                <div id="forms">
+                    <input class="left_input" type="number" min="0" name="id_ins" required>
+                    <input class="left_input" type="text" name="name" required>
+                    <div>
+                        <button id="save₋12" type="submit">Uložit</button>
+                    </div>
+                </div>
+            </form>
+        </add_form>
+
         <table>
            <tr>
                 <th>Číslo</th>
@@ -36,22 +57,6 @@ require_once ("../backend/insurance.php");
             }
             ?>
         </table>
-        <div>
-            <h4>Přidat Pojišťovnu</h4>
-            <form action="../backend/save/insurance_add.php" method="post">
-                <div>
-                    <label><b>Číslo:</b></label>
-                    <input class="left_input" type="number" min="0" name="id_ins" required>
-                </div>
-                <div>
-                    <label><b>Název:</b></label>
-                    <input class="left_input" type="text" name="name" required>
-                </div>
-                <div>
-                    <button id="save₋12" type="submit">Uložit</button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 <?php
