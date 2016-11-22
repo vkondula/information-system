@@ -1,0 +1,78 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+        table { border-collapse: collapse; }
+        td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+        dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>Ordinace praktického lékaře</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+    <dt>Autoři</dt>
+    <dd>Václav Kondula <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+        <a href="mailto:xkondu00@stud.fit.vutbr.cz">xautor01@stud.fit.vutbr.cz</a> -
+        backend
+    </dd>
+    <dd>Martin Krajňák <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+        <a href="mailto:xkrajn02@stud.fit.vutbr.cz">xautor02@stud.fit.vutbr.cz</a> -
+        frontend
+    </dd>
+    <dt>URL aplikace</dt>
+    <dd><a href="http://demo.seismic.cz">http://demo.seismic.cz</a></dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<table>
+    <tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+    <tr><td>vkondula@gmail.com</td><td>qwert</td><td>Zdravotní sestra</td></tr>
+    <tr><td>mkrajnak@redhat.com</td><td>qwert</td><td>Doktor</td></tr>
+</table>
+<p>
+    Nové uživatele smí přidávat pouze doktor. Noví uživatelé jsou vytvořeni bez hesla.<br/>
+    Heslo si následně vytvoří při prvním přihlášení.
+</p>
+
+<h2>Implementace</h2>
+<p>Informační systém rozlišuje 2 typy uživatelů, doktory a zdravotní sestry.
+Doktor narozdíl od sestry smí přidávat a odstraňovat zaměstnance a předepisovat léky.
+Tyto volby pro zdravotní sestru nejen že nejsou viditelné, ale jsou zablokované i na backendu.
+Po prvním přihlášení musí uživatel nastavit své heslo. Dokud tak neučiní, není možné přejít na jinou stránku.
+V záložkách naleznete přehled léků v databázi, číselník výkonů, pojišťovny a přehled faktur.
+Hlavní případ užití je však v kartách pacientů. Konkrétního pacienta můžete zvolit klikem
+na řádek tabulky buď ze záložek pacienti nebo kalendář, kde uživatelé vidí objednané
+pacienty na konkrétní den.
+Na kartě pacientů můžete v levé části přidávat další návštěvy a také se přecházet mezi
+jednotlivými termíny. V horní části se náchází informace o pacientovi a v dolní o zvolené návštěvě.
+</p>
+<p>Vstupním bodem na stránku je standardně index.php . Veškeré stránky zobrazitelné uživateli se nachází
+    ve složce frontend a zpravidla k této stránce přísluší stejně pojmenovaný soubor ve složce backend.
+    Všechny stránky, reagující na stisk tlačítek a odeslání formulářů se nachází ve složce backend/save.
+    Pro přístup do databáze a zaobalení SQL dotazů slouží třída Database v backend/database.php. Je
+    použita php knihovna PDO, která zabraňuje SQL injection útokům.
+</p>
+
+<h2>Instalace</h2>
+<ul>
+    <li>Podmínkou pro správný běh je PHP verze 5.6 a MySQL verze 5.6</li>
+    <li>Nebyly použity žádné frameworky, které by vyžadovali instalaci na straně serveru.</li>
+    <li>Obsah odevzdaného archivu rozbalte do kořenového adresáře pro webový server.</li>
+    <li>Inicializujte databázi pomocí <strong>xkondu00_xkrajn02.sql</strong>.</li>
+    <li>V souboru <strong>/backend/database.php</strong> upravte proměnné třídy <strong>DbConnection</strong> na připojení k databázi.</li>
+    <li>Nyní by měl být projekt plně funkční.</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Z původního zadání nebyly implementovány záznamy pro externí vyšetření. Pro tento krok jsme se rozhodli protože lze tento případ užití vyjádřit i jiným způsobem.</p>
+</body>
+</html>
