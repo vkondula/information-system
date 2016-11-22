@@ -22,20 +22,20 @@ if (!$user->is_doctor()){
 }
 
 # USER CAN'T DELETE HIMSELF
-if ($user->email == $_POST["email"]){
+if ($user->email == $_POST["delete_id"]){
     $_SESSION["error"] = "Nemůžete smazat sami sebe";
     go_back();
 }
 
 # THERE MUST ALWAYS BE AT LEAST ONE DOCTOR
-if (get_doctor_count_except($_POST["email"]) == 0){
+if (get_doctor_count_except($_POST["delete_id"]) == 0){
     $_SESSION["error"] = "V systému musí být alespoň jeden doktor";
     go_back();
 }
 
 $db = new Database();
 $req = 'DELETE FROM ZAMESTNANEC WHERE EMAIL = ?;';
-$vals = array($_POST["email"]);
+$vals = array($_POST["delete_id"]);
 $q = $db->send_query($req, $vals);
 if($q->get_count() != 1){
     $_SESSION["error"] = "Odstranění zaměstnance selhalo";

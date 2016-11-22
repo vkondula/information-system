@@ -48,8 +48,6 @@ function print_visit_info($v, $p){
     <div class="cell_center">
         <h1>Léky</h1>
         <?php
-        if (whois_logged()->is_doctor())
-            drug_form($v);
         $drugs = prescribed_drugs($v);
         if (!empty($drugs)){
             drug_print($drugs, $v, $p);
@@ -150,6 +148,7 @@ function bill_form($v, $p){
             </div>
             <div>
                 <input type="hidden" name="id_v" value="<?php echo $v; ?>">
+                <input type="hidden" name="id_p" value="<?php echo $p; ?>">
                 <button id="save₋3" type="submit">Uložit</button>
             </div>
         </form>
@@ -219,6 +218,7 @@ function drug_form($v, $p){
             </br>
             <div>
                 <input type="hidden" name="id_v" value="<?php echo $v; ?>">
+                <input type="hidden" name="id_p" value="<?php echo $p; ?>">
                 <button id="save₋4" type="submit">Uložit</button>
             </div>
         </form>

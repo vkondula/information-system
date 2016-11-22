@@ -38,6 +38,7 @@ if(!is_all_set($_POST, ["fname","surname", "rc","insurance", "street", "str_numb
 $b_date = substr($_POST["rc"], 0, 6);
 if((int)substr($_POST["rc"], 2, 1) > 1) $b_date = (int)$b_date - 5000;
 $b_date = date_create_from_format("Ymd", $b_date);
+
 $db = new Database();
 $req = 'UPDATE PACIENT SET 
     ID_RC = ?, JMENO = ?, PRIJMENI = ?, ULICE = ?, CISLO_POPISNE = ?,
@@ -46,15 +47,8 @@ $req = 'UPDATE PACIENT SET
 $vals = array($_POST["rc"], $_POST["fname"],$_POST["surname"], $_POST["street"], $_POST["str_number"], $_POST["city"], $_POST["postal_code"], $b_date, $_POST["insurance"], $_POST["id_p"]);
 $q = $db->send_query($req, $vals);
 if($q->get_count() != 1){
-    $_SESSION["error"] = "Vytvoření nového pacienta selhalo";
+    $_SESSION["error"] = "Změna údajů pacienta selhala";
+    $db->send_query("SET foreign_key_checks = 1;", array());
     go_back();
-}
-
-# CHANGE OTHER TABLES
-if($_POST["rc"] != $_POST["id_p"]){
-    $req = 'UPDATE TERMIN SET ID_PACIENT = ? WHERE ID_PACIENT = ?;';
-    $vals = array($_POST["rc"], $_POST["id_p"]);
-    $q = $db->send_query($req, $vals);
-}
-
+};
 go_back(true);
