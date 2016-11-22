@@ -42,6 +42,7 @@ include "header.php";
                 <th>Jméno</th>
                 <th>Typ</th>
                 <th>Popis</th>
+                <th>Odstranit</th>
             </tr>
             <?php
             $drugs = get_drugs();
@@ -50,6 +51,13 @@ include "header.php";
                 echo "<td>".$row["name"]."</td>";
                 echo "<td>".$row["drug_type"]."</td>";
                 echo "<td>".$row["description"]."</td>";
+                echo '<td>
+                      <form action="../backend/save/drug_remove.php" method="post">
+                        <input name="delete_id" type="hidden" value='.$row["id_drug"].'>
+                        <button onclick="return confirm(\'Opravdu chcete smazat záznam o léku? Tento lék bude smazán ze všech záznamů pacientů!\')">SMAZAT</button>
+                      </form>
+                      </td>
+                 ';
                 echo "</tr>";
             }
             ?>
