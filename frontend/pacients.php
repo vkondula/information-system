@@ -4,6 +4,14 @@ $title = "Pacienti";
 include "header.php";
 require_once ("../backend/patient.php");
 ?>
+    <script>
+        $(document).ready(function(){
+            $("add_form").hide();           // hide on start
+            $("button").click(function(){       // listen for click
+                $("add_form").toggle("fast");     // toggle when clicked
+            });
+        });
+    </script>
     <div class="site">
         <div class="content">
             <div>

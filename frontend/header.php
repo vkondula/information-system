@@ -21,14 +21,6 @@ if (!$user->has_password() and $title != "Změna hesla"){
 
     <!-- toogle button script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("add_form").hide();           // hide on start
-            $("button").click(function(){       // listen for click
-                $("add_form").toggle("fast");     // toggle when clicked
-            });
-        });
-    </script>
 </head>
 
 <body>
