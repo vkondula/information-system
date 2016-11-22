@@ -46,7 +46,7 @@ require_once ("../backend/patient.php");
                 <?php
                 $pacients = get_patients();
                 foreach ($pacients as $row) {
-                    echo "<tr onclick=\"window.document.location='pacient.php?id=".$row["id"]."';\">";
+                    echo "<tr class=\"patient_row\" onclick=\"window.document.location='pacient.php?id=".$row["id"]."';\">";
                     echo "<td>".$row["surname"]."</td>";
                     echo "<td>".$row["fname"]."</td>";
                     echo "<td>".$row["id"]."</td>";

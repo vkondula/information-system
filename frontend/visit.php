@@ -8,19 +8,24 @@ function print_visit_info($v, $p){
     <div>
         <form action="../backend/save/visit_date.php" method="post">
             <div>
-                <label><b>Datum:</b></label>
+                <div class="left">
+                    <div id="form-labels">
+                        <div class="form-label"><b>Datum:</b></div>
+                    </div>
+                    <div id="forms">
+                        <div><input class="left_input" type="date" name="date" required value="<?php echo $v_date->format("Y-m-d"); ?>"></div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div id="form-labels">
+                        <div class="form-label"><b>Čas:</b></div>
+                    </div>
+                    <div id="forms">
+                        <div><input class="left_input" type="time" name="time" required value="<?php echo $v_date->format("H:i:s"); ?>"></div>
+                    </div>
+                </div>
             </div>
-            <div>
-                <input type="date" name="date" required value="<?php echo $v_date->format("Y-m-d"); ?>">
-            </div>
-            </br>
-            <div>
-                <label><b>Čas:</b></label>
-            </div>
-            <div>
-                <input type="time" name="time" required value="<?php echo $v_date->format("H:i:s"); ?>">
-            </div>
-            <div>
+            <div class="cell_center">
                 <input type="hidden" name="id_v" value="<?php echo $v; ?>">
                 <input type="hidden" name="id_p" value="<?php echo $p; ?>">
                 <button id="save₋1" type="submit">Uložit</button>
