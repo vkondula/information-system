@@ -13,3 +13,12 @@ function get_employees(){
     $q = $db->send_query($req, $vals);
     return $q->get_data();
 }
+
+
+function get_doctor_count_except($email){
+    $req = 'SELECT EMAIL FROM ZAMESTNANEC WHERE EMAIL <> ? AND DOKTOR = 1;';
+    $vals = array($email);
+    $db = new Database();
+    $q = $db->send_query($req, $vals);
+    return $q->get_count();
+}
