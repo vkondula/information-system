@@ -62,10 +62,16 @@ function print_visit_info($v, $p){
     <div class="cell_center">
         <h1>Výkony</h1>
         <?php
-        //TODO
+        $exams = get_examinations_on_visit($v);
+        if (!empty($exams)){
+            examination_print($exams, $v, $p);
+        }
+
+        examination_form($v, $p);
+
         ?>
     </div>
-    <hr->
+    <hr/>
     <div class="cell_center">
         <h1>Faktura</h1>
         <?php
@@ -239,15 +245,16 @@ function examination_print($examination, $v, $p){
         <tr>
             <th>Název</th>
             <th>Expirace</th>
+            <th>Odstranit</th>
         </tr>';
     foreach ($examination as $row){
         echo "<tr>";
         echo "<td>".$row["name"]."</td>";
-        echo "<td>".$row["expiration"]."</td>";
+        echo "<td>".$row["expire"]."</td>";
         echo '<td>
-                  <form action="../backend/save/visit_remove_drug.php" method="post">
+                  <form action="../backend/save/visit_remove_examination.php" method="post">
                     <input name="id_term" type="hidden" value='.$row["id_term"].'>
-                    <input name="id_examination" type="hidden" value='.$row["id_drug"].'>
+                    <input name="id_exam" type="hidden" value='.$row["id_exam"].'>
                     <input type="hidden" name="id_v" value="'.$v.'">
                     <input type="hidden" name="id_p" value="'.$p.'">
                     <button onclick="return confirm(\'Opravdu chcete smazat záznam ?\')">SMAZAT</button>
@@ -270,13 +277,13 @@ function examination_form($v, $p){
     </script>
     <div>
         <examination_button>
-            <button class="add_new">Předepsat lék</button>
+            <button class="add_new">Přidat výkon</button>
         </examination_button>
     </div>
     <add_examination>
         <h2>Zapsat Výkon</h2>
         <hr/>
-        <form action="../backend/save/insurance_add.php" method="post">
+        <form action="../backend/save/visit_add_examination.php" method="post">
             <div id="form-labels">
                 <div class="form-label"><b>Název Výkonu:</b></div>
             </div>
@@ -286,7 +293,7 @@ function examination_form($v, $p){
             <div>
                 <input type="hidden" name="id_v" value="<?php echo $v; ?>">
                 <input type="hidden" name="id_p" value="<?php echo $p; ?>">
-                <button id="save₋4" type="submit">Uložit</button>
+                <button id="save₋19" type="submit">Uložit</button>
             </div>
         </form>
     </add_examination>

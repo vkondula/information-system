@@ -122,3 +122,15 @@ function is_all_set($post, $required){
     }
     return true;
 }
+
+
+function get_examinations_on_visit($v){
+    $req = 'SELECT V.NAZEV_VYKONU AS name, V.EXPIRACE AS expire,
+        V.ID_VYKONU AS id_exam, T.ID_TERMINU AS id_term
+        FROM TERMIN_VYKON T INNER JOIN VYKON V ON T.ID_VYKONU = V.ID_VYKONU
+        WHERE T.ID_TERMINU = ?;
+     ';
+    $db = new Database();
+    $q = $db->send_query($req, array($v));
+    return $q->get_data();
+}

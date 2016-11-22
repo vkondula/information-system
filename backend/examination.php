@@ -26,11 +26,11 @@ function get_examinations($name=null){
 
 
 function find_examination($name){
-    $req = 'SELECT ID_VYKONU AS id_examination FROM VYKON WHERE NAZEV_VYKONU = ?';
+    $req = 'SELECT ID_VYKONU AS id_exam FROM VYKON WHERE NAZEV_VYKONU = ?';
     $vals = array($name);
     $db = new Database();
     $q = $db->send_query($req, $vals);
     $ret = $q->get_data();
     if(empty($ret)) return null;
-    return $ret[0]["id_examination"];
+    return $ret[0]["id_exam"];
 }
