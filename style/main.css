@@ -240,7 +240,7 @@ button {
 }
 
 #form-labels{
-    width: 50%;
+    width: 45%;
     float: left;
     text-align: right;
 }
@@ -251,7 +251,7 @@ button {
 }
 
 #forms{
-    width: 50%;
+    width: 55%;
     float: right;
     text-align: left;
 }

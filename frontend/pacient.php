@@ -63,7 +63,7 @@ include "header.php";
                         <div class="right">
                             <div id="form-labels">
                                 <div class="form-label"><b>Rodné číslo:</b></div>
-                                <div class="form-label"><b>Číslo pojišťovny:</b></div>
+                                <div class="form-label"><b>Pojišťovna:</b></div>
                             </div>
                             <div id="forms">
                                 <div><input class="left_input" type="text" name="rc" required value="<?php echo $patient["rc"]; ?>"></div>

@@ -60,6 +60,13 @@ function print_visit_info($v, $p){
     </div>
     <hr/>
     <div class="cell_center">
+        <h1>Výkony</h1>
+        <?php
+        //TODO
+        ?>
+    </div>
+    <hr->
+    <div class="cell_center">
         <h1>Faktura</h1>
         <?php
         $bills = get_bill($v);
@@ -225,4 +232,65 @@ function drug_form($v, $p){
     </add_drug>
 <?php
 }
+
+function examination_print($examination, $v, $p){
+
+    echo '<table>
+        <tr>
+            <th>Název</th>
+            <th>Expirace</th>
+        </tr>';
+    foreach ($examination as $row){
+        echo "<tr>";
+        echo "<td>".$row["name"]."</td>";
+        echo "<td>".$row["expiration"]."</td>";
+        echo '<td>
+                  <form action="../backend/save/visit_remove_drug.php" method="post">
+                    <input name="id_term" type="hidden" value='.$row["id_term"].'>
+                    <input name="id_examination" type="hidden" value='.$row["id_drug"].'>
+                    <input type="hidden" name="id_v" value="'.$v.'">
+                    <input type="hidden" name="id_p" value="'.$p.'">
+                    <button onclick="return confirm(\'Opravdu chcete smazat záznam ?\')">SMAZAT</button>
+                  </form>
+              </td>';
+        echo "</tr>";
+    }
+    echo "</table>";
+}
+
+function examination_form($v, $p){
+    ?>
+    <script>
+        $(document).ready(function(){
+            $("add_examination").hide();           // hide on start
+            $("examination_button").click(function(){       // listen for click
+                $("add_examination").toggle("fast");     // toggle when clicked
+            });
+        });
+    </script>
+    <div>
+        <examination_button>
+            <button class="add_new">Předepsat lék</button>
+        </examination_button>
+    </div>
+    <add_examination>
+        <h2>Zapsat Výkon</h2>
+        <hr/>
+        <form action="../backend/save/insurance_add.php" method="post">
+            <div id="form-labels">
+                <div class="form-label"><b>Název Výkonu:</b></div>
+            </div>
+            <div id="forms">
+                <input class="left_input" type="text" name="name" required>
+            </div>
+            <div>
+                <input type="hidden" name="id_v" value="<?php echo $v; ?>">
+                <input type="hidden" name="id_p" value="<?php echo $p; ?>">
+                <button id="save₋4" type="submit">Uložit</button>
+            </div>
+        </form>
+    </add_examination>
+<?php
+}
 ?>
+
