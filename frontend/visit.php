@@ -284,12 +284,13 @@ function examination_form($v, $p){
         <h2>Zapsat Výkon</h2>
         <hr/>
         <form action="../backend/save/visit_add_examination.php" method="post">
-            <div id="form-labels">
-                <div class="form-label"><b>Název Výkonu:</b></div>
+            <div>
+                <label><b>Název Výkonu:</b></label>
             </div>
-            <div id="forms">
-                <input class="left_input" type="text" name="name" required>
+            <div>
+                <input type="text" placeholder="Název výkonu" name="name" required>
             </div>
+            </br>
             <div>
                 <input type="hidden" name="id_v" value="<?php echo $v; ?>">
                 <input type="hidden" name="id_p" value="<?php echo $p; ?>">
