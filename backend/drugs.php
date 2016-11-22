@@ -23,3 +23,14 @@ function get_drugs($name=null){
     $q = $db->send_query($req, $vals);
     return $q->get_data();
 }
+
+
+function find_drug($name){
+    $req = 'SELECT ID_LEKU AS id_drug FROM LEK WHERE NAZEV = ?';
+    $vals = array($name);
+    $db = new Database();
+    $q = $db->send_query($req, $vals);
+    $ret = $q->get_data();
+    if(empty($ret)) return null;
+    return $ret[0]["id_drug"];
+}

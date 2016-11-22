@@ -50,9 +50,9 @@ function print_visit_info($v, $p){
         <?php
         $drugs = prescribed_drugs($v);
         if (!empty($drugs)){
-            drug_print($drugs);
+            drug_print($drugs, $v, $p);
         }
-        if (whois_logged()->is_doctor()) drug_form($v);
+        if (whois_logged()->is_doctor()) drug_form($v, $p);
         ?>
     </div>
     <hr/>
@@ -61,14 +61,15 @@ function print_visit_info($v, $p){
         <?php
         $bills = get_bill($v);
         if (!empty($bills)){
-            bill_print($bills);
+            bill_print($bills, $v, $p);
         }
-        bill_form($v);
+        bill_form($v, $p);
         ?>
     </div>
     <div align="right">
         <form action="../backend/save/visit_remove.php" method="post">
             <input type="hidden" name="id_p" value="<?php echo $p; ?>">
+            <input type="hidden" name="id_v" value="<?php echo $v; ?>">
             <button class="red_button" id="save₋0" type="submit" onclick="return confirm('Opravdu chcete smazat všechny informace o navštěvě? Tato akce je nevratná.')">Smazat návštěvu</button>
         </form>
     </div>
@@ -76,7 +77,7 @@ function print_visit_info($v, $p){
 <?php
 }
 
-function bill_print($bills){
+function bill_print($bills, $v, $p){
     echo '<table>
         <tr>
             <th>Datum splatnosti</th>
@@ -93,6 +94,8 @@ function bill_print($bills){
            <td>
               <form action="../backend/save/visit_remove_bill.php"" method="post">
                 <input name="id_bill" type="hidden" value=' . $bill["id_bill"] . '>
+                <input type="hidden" name="id_v" value="'.$v.'">
+                <input type="hidden" name="id_p" value="'.$p.'">
                 <button onclick="return confirm(\'Opravdu chcete smazat záznam?\')">SMAZAT</button>
               </form>
           </td>';
@@ -101,7 +104,7 @@ function bill_print($bills){
     echo '</table>';
 }
 
-function bill_form($v){
+function bill_form($v, $p){
 ?>
     <h2>Nová faktura</h2>
     <form action="../backend/save/visit_add_bill.php" method="post">
@@ -127,13 +130,14 @@ function bill_form($v){
         </div>
         <div>
             <input type="hidden" name="id_v" value="<?php echo $v; ?>">
+            <input type="hidden" name="id_p" value="<?php echo $p; ?>">
             <button id="save₋3" type="submit">Uložit</button>
         </div>
     </form>
 <?php
 }
 
-function drug_print($drugs){
+function drug_print($drugs, $v, $p){
     echo '<table>
         <tr>
             <th>Název</th>
@@ -150,6 +154,8 @@ function drug_print($drugs){
                   <form action="../backend/save/visit_remove_drug.php" method="post">
                     <input name="id_term" type="hidden" value='.$row["id_term"].'>
                     <input name="id_drug" type="hidden" value='.$row["id_drug"].'>
+                    <input type="hidden" name="id_v" value="'.$v.'">
+                    <input type="hidden" name="id_p" value="'.$p.'">
                     <button onclick="return confirm(\'Opravdu chcete smazat záznam ?\')">SMAZAT</button>
                   </form>
               </td>';
@@ -158,7 +164,7 @@ function drug_print($drugs){
     echo "</table>";
 }
 
-function drug_form($v){
+function drug_form($v, $p){
     ?>
     <h2>Předepsat lék</h2>
     <form action="../backend/save/visit_add_drug.php" method="post">
@@ -178,6 +184,7 @@ function drug_form($v){
         </br>
         <div>
             <input type="hidden" name="id_v" value="<?php echo $v; ?>">
+            <input type="hidden" name="id_p" value="<?php echo $p; ?>">
             <button id="save₋4" type="submit">Uložit</button>
         </div>
     </form>

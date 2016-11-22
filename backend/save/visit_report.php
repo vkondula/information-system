@@ -3,6 +3,11 @@ session_start();
 require_once("../database.php");
 require_once ("../patient.php");
 # REDIRECT WHEN NOT LOGGED IN
+if (!isset($_SESSION["login_user"])){
+    header("Location: /frontend/log_form.php");
+    exit;
+}
+
 function go_back(){
     header("Location: /frontend/pacient.php?id=".$_POST["id_p"]."&v=".$_POST["id_v"]);
     exit;

@@ -3,13 +3,13 @@ session_start();
 require_once("../database.php");
 require_once ("../patient.php");
 # REDIRECT WHEN NOT LOGGED IN
-function go_back(){
-    header("Location: /frontend/pacients.php");
+if (!isset($_SESSION["login_user"])){
+    header("Location: /frontend/log_form.php");
     exit;
 }
 
-if (!isset($_SESSION["login_user"])){
-    header("Location: /frontend/log_form.php");
+function go_back(){
+    header("Location: /frontend/pacients.php");
     exit;
 }
 
@@ -33,8 +33,8 @@ if(!is_all_set($_POST, ["fname","surname", "rc","insurance", "street", "str_numb
     go_back();
 }
 
-$b_date = substr($rc, 0, 6);
-if((int)substr($rc, 2, 1) > 1) $b_date = (int)$b_date - 5000;
+$b_date = substr($_POST["rc"], 0, 6);
+if((int)substr($_POST["rc"], 2, 1) > 1) $b_date = (int)$b_date - 5000;
 $b_date = date_create_from_format("Ymd", $b_date);
 $db = new Database();
 $req = 'INSERT INTO PACIENT VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
