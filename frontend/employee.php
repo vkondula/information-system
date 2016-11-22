@@ -8,6 +8,14 @@ $doc = whois_logged()->is_doctor();
 ?>
 <div class="site">
     <div class="content">
+        <script>
+            $(document).ready(function(){
+                $("add_form").hide();           // hide on start
+                $("button").click(function(){       // listen for click
+                    $("add_form").toggle("fast");     // toggle when clicked
+                });
+            });
+        </script>
         <h1>Zaměstnanci</h1>
         <?php
         if($doc){

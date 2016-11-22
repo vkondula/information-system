@@ -33,7 +33,7 @@ function print_visit_info($v, $p){
         </form>
     </div>
     <hr/>
-    <div>
+    <div class="cell_center">
         <h1>Zpráva</h1>
         <textarea rows="10" cols="70" name="comment" form="report_form" maxlength="1023"><?php echo $v_info["report"]; ?></textarea>
         <form action="../backend/save/visit_report.php" method="post" id="report_form">
@@ -45,18 +45,22 @@ function print_visit_info($v, $p){
         </form>
     </div>
     <hr/>
-    <div>
+    <div class="cell_center">
         <h1>Léky</h1>
         <?php
+        if (whois_logged()->is_doctor())
+            drug_form($v);
         $drugs = prescribed_drugs($v);
         if (!empty($drugs)){
             drug_print($drugs, $v, $p);
         }
-        if (whois_logged()->is_doctor()) drug_form($v, $p);
+
+        if (whois_logged()->is_doctor())
+            drug_form($v, $p);
         ?>
     </div>
     <hr/>
-    <div>
+    <div class="cell_center">
         <h1>Faktura</h1>
         <?php
         $bills = get_bill($v);
@@ -106,34 +110,50 @@ function bill_print($bills, $v, $p){
 
 function bill_form($v, $p){
 ?>
-    <h2>Nová faktura</h2>
-    <form action="../backend/save/visit_add_bill.php" method="post">
-        <div>
-            <label><b>Datum:</b></label>
-        </div>
-        <div>
-            <input type="date" name="date" required value="<?php echo date("Y-m-d"); ?>">
-        </div>
-        </br>
-        <div>
-            <label><b>Cena:</b></label>
-        </div>
-        <div>
-            <input type="number" name="price" min="0" required value=0">
-        </div>
-        </br>
-        <div>
-            <label><b>Doplatek:</b></label>
-        </div>
-        <div>
-            <input type="number" name="extra" min="0" required value=0">
-        </div>
-        <div>
-            <input type="hidden" name="id_v" value="<?php echo $v; ?>">
-            <input type="hidden" name="id_p" value="<?php echo $p; ?>">
-            <button id="save₋3" type="submit">Uložit</button>
-        </div>
-    </form>
+
+    <script>
+        $(document).ready(function(){
+            $("add_bill").hide();           // hide on start
+            $("bill_button").click(function(){       // listen for click
+                $("add_bill").toggle("fast");     // toggle when clicked
+            });
+        });
+    </script>
+    <div>
+        <bill_button type="button">
+            <button>Přidat fakturu</button>
+        </bill_button>
+     </div>
+    <add_bill>
+        <h2>Nová faktura</h2>
+        <hr/>
+        <form action="../backend/save/visit_add_bill.php" method="post">
+            <div>
+                <label><b>Datum:</b></label>
+            </div>
+            <div>
+                <input type="date" name="date" required value="<?php echo date("Y-m-d"); ?>">
+            </div>
+            </br>
+            <div>
+                <label><b>Cena:</b></label>
+            </div>
+            <div>
+                <input type="number" name="price" min="0" required value=0">
+            </div>
+            </br>
+            <div>
+                <label><b>Doplatek:</b></label>
+            </div>
+            <div>
+                <input type="number" name="extra" min="0" required value=0">
+            </div>
+            <div>
+                <input type="hidden" name="id_v" value="<?php echo $v; ?>">
+                <button id="save₋3" type="submit">Uložit</button>
+            </div>
+        </form>
+    </add_bill>
 <?php
 }
 
@@ -166,28 +186,43 @@ function drug_print($drugs, $v, $p){
 
 function drug_form($v, $p){
     ?>
-    <h2>Předepsat lék</h2>
-    <form action="../backend/save/visit_add_drug.php" method="post">
-        <div>
-            <label><b>Lék:</b></label>
-        </div>
-        <div>
-            <input type="text" placeholder="Název léku" name="name" required>
-        </div>
-        </br>
-        <div>
-            <label><b>Počet balení:</b></label>
-        </div>
-        <div>
-            <input type="number" name="number" min="1" required value="1">
-        </div>
-        </br>
-        <div>
-            <input type="hidden" name="id_v" value="<?php echo $v; ?>">
-            <input type="hidden" name="id_p" value="<?php echo $p; ?>">
-            <button id="save₋4" type="submit">Uložit</button>
-        </div>
-    </form>
+    <script>
+        $(document).ready(function(){
+            $("add_drug").hide();           // hide on start
+            $("drug_button").click(function(){       // listen for click
+                $("add_drug").toggle("fast");     // toggle when clicked
+            });
+        });
+    </script>
+    <div>
+        <drug_button>
+            <button class="add_new">Předepsat lék</button>
+        </drug_button>
+    </div>
+    <add_drug>
+        <h2>Předepsat lék</h2>
+        <hr/>
+        <form action="../backend/save/visit_add_drug.php" method="post">
+            <div>
+                <label><b>Lék:</b></label>
+            </div>
+            <div>
+                <input type="text" placeholder="Název léku" name="name" required>
+            </div>
+            </br>
+            <div>
+                <label><b>Počet balení:</b></label>
+            </div>
+            <div>
+                <input type="number" name="number" min="1" required value="1">
+            </div>
+            </br>
+            <div>
+                <input type="hidden" name="id_v" value="<?php echo $v; ?>">
+                <button id="save₋4" type="submit">Uložit</button>
+            </div>
+        </form>
+    </add_drug>
 <?php
 }
 ?>

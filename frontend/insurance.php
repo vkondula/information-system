@@ -6,6 +6,14 @@ require_once ("../backend/insurance.php");
 ?>
 <div class="site">
     <div class="content">
+        <script>
+            $(document).ready(function(){
+                $("add_form").hide();           // hide on start
+                $("button").click(function(){       // listen for click
+                    $("add_form").toggle("fast");     // toggle when clicked
+                });
+            });
+        </script>
         <div>
             <h1>Pojišťovny</h1>
             <button class="add_new">Přidat Pojišťovnu</button>
