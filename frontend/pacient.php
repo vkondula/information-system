@@ -71,12 +71,14 @@ include "header.php";
                             </div>
                         </div>
                     </div>
-                    <button form="pac_form" id="save₋8" type="submit">Uložit změny</button>
                 </form>
-                <form action="../backend/pacient_remove.php" method="post">
+                <form action="../backend/pacient_remove.php" method="post" id="rm_pac">
                     <input type="hidden" name="id_p" value="<?php echo $patient["rc"]; ?>">
-                    <button class="red_button" id="remove₋0" type="submit" onclick="return confirm('Opravdu chcete smazat všechny informace o pacientovi? Tato akce je nevratná.')">Smazat pacienta</button>
                 </form>
+                <span>
+                    <button form="pac_form" id="save₋8" type="submit">Uložit změny</button>
+                    <button form="rm_pac" class="red_button" id="remove₋0" type="submit" onclick="return confirm('Opravdu chcete smazat všechny informace o pacientovi? Tato akce je nevratná.')">Smazat pacienta</button>
+                </span>
             </div>
         </div>
             <?php

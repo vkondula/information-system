@@ -6,6 +6,7 @@ function print_visit_info($v, $p){
 ?>
 <div class='rightcontent'>
     <div>
+        <h4>Vyšetření</h4>
         <form action="../backend/save/visit_date.php" method="post">
             <div>
                 <div class="left">
@@ -108,12 +109,11 @@ function bill_print($bills, $v, $p){
 
 function bill_form($v, $p){
 ?>
-
     <script>
         $(document).ready(function(){
-            $("add_bill").hide();           // hide on start
-            $("bill_button").click(function(){       // listen for click
-                $("add_bill").toggle("fast");     // toggle when clicked
+            $("add_bill").hide();                   // hide on start
+            $("bill_button").click(function(){      // listen for click
+                $("add_bill").toggle("fast");       // toggle when clicked
             });
         });
     </script>
