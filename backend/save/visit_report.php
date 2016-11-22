@@ -23,7 +23,7 @@ $db = new Database();
 $req = 'UPDATE TERMIN SET ZPRAVA = ? WHERE ID_TERMINU = ?;';
 $vals = array($_POST["comment"], $_POST["id_v"]);
 $q = $db->send_query($req, $vals);
-if($q->get_count() != 1){
+if(!$q->is_ok()){
     $_SESSION["error"] = "Uložení zprávy selhalo";
 }
 go_back();

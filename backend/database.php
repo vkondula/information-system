@@ -81,4 +81,8 @@ class Query{
     public function get_count(){
         return $this->stmt->rowCount();
     }
+
+    public function is_ok(){
+        return $this->stmt->errorInfo()[1] == null;
+    }
 }

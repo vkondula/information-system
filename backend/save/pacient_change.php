@@ -46,7 +46,7 @@ $req = 'UPDATE PACIENT SET
     WHERE ID_RC = ?;';
 $vals = array($_POST["rc"], $_POST["fname"],$_POST["surname"], $_POST["street"], $_POST["str_number"], $_POST["city"], $_POST["postal_code"], $b_date, $_POST["insurance"], $_POST["id_p"]);
 $q = $db->send_query($req, $vals);
-if($q->get_count() != 1){
+if(!$q->is_ok()){
     $_SESSION["error"] = "Změna údajů pacienta selhala";
     $db->send_query("SET foreign_key_checks = 1;", array());
     go_back();

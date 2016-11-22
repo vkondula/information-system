@@ -27,7 +27,7 @@ $db = new Database();
 $req = 'UPDATE TERMIN SET DATUM_CAS = ? WHERE ID_TERMINU = ?;';
 $vals = array($_POST["date"]." ".$_POST["time"], $_POST["id_v"]);
 $q = $db->send_query($req, $vals);
-if($q->get_count() != 1){
+if(!$q->is_ok()){
     $_SESSION["error"] = "Změna data termínu selhala";
 }
 go_back();
