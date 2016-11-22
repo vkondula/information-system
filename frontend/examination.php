@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mkrajnak
- * Date: 11/22/16
- * Time: 3:41 PM
- */
 session_start();
 $title = "Výkony";
 require_once("../backend/examination.php");
@@ -34,7 +28,7 @@ include "header.php";
                     </div>
                     <div id="forms">
                         <input class="left_input" type="text" name="name" required>
-                        <input class="left_input" type="number" name="number" min="1" required value="1">
+                        <input class="left_input" type="number" name="number" min="1" placeholder="počet dní">
                         <div>
                             <button id="save₋11" type="submit">Uložit</button>
                         </div>
@@ -45,6 +39,7 @@ include "header.php";
                 <tr>
                     <th>Jméno</th>
                     <th>Expirace</th>
+                    <th>Odstranit</th>
                 </tr>
                 <?php
                 $examinations = get_examinations();
@@ -52,6 +47,13 @@ include "header.php";
                     echo "<tr>";
                     echo "<td>".$row["name"]."</td>";
                     echo "<td>".$row["expiration"]."</td>";
+                    echo '<td>
+                      <form action="../backend/save/examination_remove.php" method="post">
+                        <input name="delete_id" type="hidden" value='.$row["id"].'>
+                        <button onclick="return confirm(\'Opravdu chcete smazat záznam o výkonu? Tento výkon bude smazán ze všech záznamů pacientů!\')">SMAZAT</button>
+                      </form>
+                      </td>
+                 ';
                     echo "</tr>";
                 }
                 ?>

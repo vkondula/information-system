@@ -5,7 +5,7 @@ require_once("database.php");
 function get_examinations($name=null){
     if (!empty($name)){
         $req = '
-            SELECT V.NAZEV_VYKONU AS name, V.EXPIRACE AS expiration
+            SELECT V.NAZEV_VYKONU AS name, V.EXPIRACE AS expiration, V.ID_VYKONU AS id
             FROM VYKON V
             WHERE V.NAZEV_VYKONU LIKE ?
             ORDER BY V.NAZEV_VYKONU ASC;
@@ -13,7 +13,7 @@ function get_examinations($name=null){
         $vals = array("%".$name."%");
     } else {
         $req = '
-            SELECT V.NAZEV_VYKONU AS name, V.EXPIRACE AS expiration
+            SELECT V.NAZEV_VYKONU AS name, V.EXPIRACE AS expiration, V.ID_VYKONU AS id
             FROM VYKON V
             ORDER BY V.NAZEV_VYKONU ASC;
          ';
