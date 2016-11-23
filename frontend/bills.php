@@ -9,7 +9,7 @@ include "header.php";
         <script>
             $(document).ready(function(){
                 $("add_form").hide();
-                $("add_form").toggle("fast");     // toggle when clicked
+                $("add_form").slideDown("slow");     // toggle when clicked
             });
         </script>
         <h1>Faktury</h1>

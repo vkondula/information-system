@@ -71,8 +71,8 @@ function print_visit_info($v, $p){
 
         ?>
     </div>
-    <hr/>
     <div class="cell_center">
+        <hr/>
         <h1>Faktura</h1>
         <?php
         $bills = get_bill($v);
@@ -139,32 +139,21 @@ function bill_form($v, $p){
         <h2>Nová faktura</h2>
         <hr/>
         <form action="../backend/save/visit_add_bill.php" method="post">
-            <div>
-                <label><b>Datum:</b></label>
+            <div id="form-labels">
+                <div class="form-label"><b>Datum:</b></div>
+                <div class="form-label"><b>Cena:</b></div>
+                <div class="form-label"><b>Doplatek:</b></div>
             </div>
-            <div>
-                <input type="date" name="date" required value="<?php echo date("Y-m-d"); ?>">
-            </div>
-            </br>
-            <div>
-                <label><b>Cena:</b></label>
-            </div>
-            <div>
-                <input type="number" name="price" min="0" required value=0">
-            </div>
-            </br>
-            <div>
-                <label><b>Doplatek:</b></label>
-            </div>
-            <div>
-                <input type="number" name="extra" min="0" required value=0">
+            <div id="forms">
+                <div><input class="left_input" type="date" name="date" required value="<?php echo date("Y-m-d"); ?>"></div>
+                <div><input class="left_input" type="number" name="price" min="0" required value=0"></div>
+                <div><input class="left_input" type="number" name="extra" min="0" required value=0"></div>
             </div>
             <div>
                 <input type="hidden" name="id_v" value="<?php echo $v; ?>">
                 <input type="hidden" name="id_p" value="<?php echo $p; ?>">
                 <button id="save₋3" type="submit">Uložit</button>
             </div>
-        </form>
     </add_bill>
 <?php
 }
@@ -215,25 +204,20 @@ function drug_form($v, $p){
         <h2>Předepsat lék</h2>
         <hr/>
         <form action="../backend/save/visit_add_drug.php" method="post">
-            <div>
-                <label><b>Lék:</b></label>
+            <div id="form-labels">
+                <div class="form-label"><b>Lék:</b></div>
+                <div class="form-label"><b>Počet balení:</b></div>
             </div>
-            <div>
-                <input type="text" placeholder="Název léku" name="name" required>
+            <div id="forms">
+                <div><input class="left_input" type="text" placeholder="Název léku" name="name" required></div>
+                <div><input class="left_input" type="number" name="number" min="1" required value="1"></div>
+                <div>
+                    <input  type="hidden" name="id_v" value="<?php echo $v; ?>">
+                    <input  type="hidden" name="id_p" value="<?php echo $p; ?>">
+                    <button id="save₋4" type="submit">Uložit</button>
+                </div>
             </div>
-            </br>
-            <div>
-                <label><b>Počet balení:</b></label>
-            </div>
-            <div>
-                <input type="number" name="number" min="1" required value="1">
-            </div>
-            </br>
-            <div>
-                <input type="hidden" name="id_v" value="<?php echo $v; ?>">
-                <input type="hidden" name="id_p" value="<?php echo $p; ?>">
-                <button id="save₋4" type="submit">Uložit</button>
-            </div>
+
         </form>
     </add_drug>
 <?php
@@ -280,24 +264,25 @@ function examination_form($v, $p){
             <button class="add_new">Přidat výkon</button>
         </examination_button>
     </div>
+    <div>
     <add_examination>
         <h2>Zapsat Výkon</h2>
         <hr/>
         <form action="../backend/save/visit_add_examination.php" method="post">
-            <div>
-                <label><b>Název Výkonu:</b></label>
+            <div id="form-labels">
+                <div class="form-label"><b>Název Výkonu:</b></div>
             </div>
-            <div>
-                <input type="text" placeholder="Název výkonu" name="name" required>
-            </div>
-            </br>
-            <div>
+            <div id="forms">
+                <div><input class="left_input" type="text" placeholder="Název výkonu" name="name" required></div>
+                <div>
                 <input type="hidden" name="id_v" value="<?php echo $v; ?>">
                 <input type="hidden" name="id_p" value="<?php echo $p; ?>">
-                <button id="save₋19" type="submit">Uložit</button>
+                <span><button id="save₋19" type="submit">Uložit</button></span>
+                </div>
             </div>
         </form>
     </add_examination>
+    </div>
 <?php
 }
 ?>

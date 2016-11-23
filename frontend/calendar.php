@@ -6,6 +6,12 @@ include "header.php";
 ?>
 <div class="site">
     <div class="content">
+        <script>
+            $(document).ready(function(){
+                $("add_form").hide();
+                $("add_form").toggle("fast");     // toggle when clicked
+            });
+        </script>
         <h1>Seznam návštev</h1>
         <?php
             $date_ymd = $_GET["date"];
@@ -19,24 +25,31 @@ include "header.php";
                 <button id="show_2" type="submit">Zobraz</button>
             </div>
         </form>
-        <?php
-        echo '<table>
-                    <tr>
-                        <th>Čas</th>
-                        <th>Příjmení</th>
-                        <th>Jméno</th>
-                        <th>Rodné číslo</th>
-                    </tr>';
-        foreach ($mtgs as $row){
-            echo "<tr onclick=\"window.document.location='pacient.php?id=".$row["id_pat"]."&v=".$row["id_v"]."';\">";
-            echo "<td>" . $row["m_date"] . "</td>";
-            echo "<td>" . $row["surname"] . "</td>";
-            echo "<td>" . $row["fname"] . "</td>";
-            echo "<td>" . $row["id_pat"] . "</td>";
-            echo "</tr>";
-        }
-        echo '</table>';
-        ?>
+        <add_form>
+            <?php
+            if (sizeof($mtgs) !== 0) {
+                echo '<table>
+                            <tr>
+                                <th>Datum a Čas</th>
+                                <th>Příjmení</th>
+                                <th>Jméno</th>
+                                <th>Rodné číslo</th>
+                            </tr>';
+                foreach ($mtgs as $row) {
+                    echo "<tr class=\"patient_row\" onclick=\"window.document.location='pacient.php?id=" . $row["id_pat"] . "&v=" . $row["id_v"] . "';\">";
+                    echo "<td>" . $row["m_date"] . "</td>";
+                    echo "<td>" . $row["surname"] . "</td>";
+                    echo "<td>" . $row["fname"] . "</td>";
+                    echo "<td>" . $row["id_pat"] . "</td>";
+                    echo "</tr>";
+                }
+                echo '</table>';
+            }
+            else {
+                echo "<h2>Žádna návšteva pro uvedené období</h2>";
+            }
+            ?>
+        </add_form>
     </div>
 </div>
 <?php

@@ -252,7 +252,7 @@ button {
 
 #forms{
     width: 50%;
-    float: right;
+    display:inline-block;
     text-align: left;
 }
 table {
