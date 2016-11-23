@@ -102,7 +102,7 @@ body {
     border-color: #1391EA;
     margin: 5px;
     height: 20px;
-    width: 50%;
+    width: 90%;
     text-align: left;
     color: #444;
     min-width: 90px;
@@ -240,7 +240,7 @@ button {
 }
 
 #form-labels{
-    width: 45%;
+    width: 50%;
     float: left;
     text-align: right;
 }
@@ -251,7 +251,7 @@ button {
 }
 
 #forms{
-    width: 55%;
+    width: 50%;
     float: right;
     text-align: left;
 }
@@ -295,6 +295,10 @@ th {
 .right{
     width: 50%;
     float: right;
+}
+
+.patient_control{
+    text-align: right;
 }
 
 /* smaller screens */

@@ -38,7 +38,7 @@ function print_visit_info($v, $p){
         <h1>Zpráva</h1>
         <textarea rows="10" cols="70" name="comment" form="report_form" maxlength="1023"><?php echo $v_info["report"]; ?></textarea>
         <form action="../backend/save/visit_report.php" method="post" id="report_form">
-            <div>
+            <div class="cell_center">
                 <input type="hidden" name="id_v" value="<?php echo $v; ?>">
                 <input type="hidden" name="id_p" value="<?php echo $p; ?>">
                 <button id="save₋2" type="submit">Uložit</button>

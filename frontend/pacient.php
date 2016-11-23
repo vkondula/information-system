@@ -75,10 +75,10 @@ include "header.php";
                 <form action="../backend/pacient_remove.php" method="post" id="rm_pac">
                     <input type="hidden" name="id_p" value="<?php echo $patient["rc"]; ?>">
                 </form>
-                <span>
+                <div class="patient_control">
                     <button form="pac_form" id="save₋8" type="submit">Uložit změny</button>
                     <button form="rm_pac" class="red_button" id="remove₋0" type="submit" onclick="return confirm('Opravdu chcete smazat všechny informace o pacientovi? Tato akce je nevratná.')">Smazat pacienta</button>
-                </span>
+                </div>
             </div>
         </div>
             <?php
