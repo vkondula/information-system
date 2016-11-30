@@ -24,6 +24,7 @@ CREATE TABLE PACIENT (
 	MESTO			VARCHAR(30) NOT NULL,
 	PSC				CHAR(5) NOT NULL,
 	DATUM_NAROZENI	DATE NOT NULL,
+	MAIL      VARCHAR(50) NOT NULL,
 	EVIDOVAN_OD		DATE NOT NULL,
 	ID_POJISTOVNA	CHAR(3) NOT NULL,
 	CHECK( round(ID_RC/11.0) = ID_RC/11.0 ),
@@ -117,10 +118,10 @@ INSERT INTO POJISTOVNA VALUES('209','Zaměstnanecká pojišťovna Škoda');
 INSERT INTO POJISTOVNA VALUES('211','Zdravotní pojišťovna ministerstva vnitra ČR');
 INSERT INTO POJISTOVNA VALUES('213','Revírní bratrská pokladna, zdrav. pojišťovna');
 
-INSERT INTO PACIENT VALUES ('8811050622', 'John', 'Doe', 'Kolejní', 9, 'Brno', '61205', '19981105', '20010505','111');
-INSERT INTO PACIENT VALUES ('8811090629', 'Will', 'Smith', 'Palackého', 12, 'Praha', '61342','19981109','20020209','201');
-INSERT INTO PACIENT VALUES ('8860030619', 'Jane', 'Doe', 'Kolejní', 9, 'Brno', '61205', '19981003', '20010510','111');
-INSERT INTO PACIENT VALUES ('8660030621', 'Marge', 'Smith', 'Palackého', 12, 'Praha', '61342','19861003','20020209','211');
+INSERT INTO PACIENT VALUES ('8811050622', 'John', 'Doe', 'Kolejní', 9, 'Brno', '61205', '19981105', 'johndoe@mail.com', '20010505','111');
+INSERT INTO PACIENT VALUES ('8811090629', 'Will', 'Smith', 'Palackého', 12, 'Praha', '61342','19981109', 'willsmith@mail.com','20020209','201');
+INSERT INTO PACIENT VALUES ('8860030619', 'Jane', 'Doe', 'Kolejní', 9, 'Brno', '61205', '19981003', 'janedoe@mail.com','20010510','111');
+INSERT INTO PACIENT VALUES ('8660030621', 'Marge', 'Smith', 'Palackého', 12, 'Praha', '61342','19861003', 'margesmith@mail.com' ,'20020209','211');
 
 INSERT INTO VYKON VALUES(NULL, 'Očkování', 365);
 INSERT INTO VYKON VALUES(NULL, 'Prohlídka', 365);
