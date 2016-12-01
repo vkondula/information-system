@@ -15,7 +15,7 @@ include "header.php";
         <div class="sidepanel" >
 
             <form action="../backend/save/visit_new.php" method="post">
-                <input type="hidden" name="id_p" value="">
+                <input type="hidden" name="id_p" value="<?php echo $patient["rc"]; ?>">
                 <button id="save₋0" type="submit">Nová návšteva</button>
             </form>
             <h4>Návštevy pacienta</h4>
