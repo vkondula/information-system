@@ -13,8 +13,9 @@ include "header.php";
     <div class="site">
 
         <div class="sidepanel" >
+
             <form action="../backend/save/visit_new.php" method="post">
-                <input type="hidden" name="id_p" value="<?php echo $patient["rc"]; ?>">
+                <input type="hidden" name="id_p" value="">
                 <button id="save₋0" type="submit">Nová návšteva</button>
             </form>
             <h4>Návštevy pacienta</h4>
@@ -38,6 +39,7 @@ include "header.php";
         </div>
         <div class="rightcontent">
             <div>
+
                 <form action="../backend/save/pacient_change.php" method="post" id="pac_form">
                     <input type="hidden" name="id_p" value="<?php echo $patient["rc"]; ?>">
                     <div>
@@ -52,12 +54,14 @@ include "header.php";
                                 <div class="form-label"><b>Číslo popisné:</b></div>
                                 <div class="form-label"><b>Město:</b></div>
                                 <div class="form-label"><b>PSČ:</b></div>
+                                <div class="form-label"><b>Mail:</b></div>
                             </div>
                             <div id="forms">
                                 <div><input class="left_input" type="text" name="street" required value="<?php echo $patient["street"]; ?>"></div>
                                 <div><input class="left_input" type="text" name="str_number" required value="<?php echo $patient["str_number"]; ?>"></div>
                                 <div><input class="left_input" type="text" name="city" required value="<?php echo $patient["city"]; ?>"></div>
                                 <div><input class="left_input" type="number" name="postal_code" min="0" required value="<?php echo $patient["postal_code"]; ?>"></div>
+                                <div><input class="left_input" type="email" name="mail" required value="<?php echo $patient["mail"]; ?>"></div>
                             </div>
                         </div>
                         <div class="right">

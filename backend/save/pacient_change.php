@@ -30,7 +30,7 @@ if($_POST["rc"] != $_POST["id_p"] && !is_rc_uniq($_POST["rc"])){
     go_back();
 }
 
-if(!is_all_set($_POST, ["fname","surname", "rc","insurance", "street", "str_number", "city", "postal_code"])){
+if(!is_all_set($_POST, ["fname","surname", "rc","insurance", "street", "str_number", "city", "mail", "postal_code"])){
     $_SESSION["error"] = "Nebyly zadány všechny povinné položky";
     go_back();
 }
@@ -42,9 +42,9 @@ $b_date = date_create_from_format("Ymd", $b_date);
 $db = new Database();
 $req = 'UPDATE PACIENT SET 
     ID_RC = ?, JMENO = ?, PRIJMENI = ?, ULICE = ?, CISLO_POPISNE = ?,
-    MESTO = ?, PSC = ?, DATUM_NAROZENI = ?, ID_POJISTOVNA = ?
+    MESTO = ?, PSC = ?, DATUM_NAROZENI = ?, MAIL = ?, ID_POJISTOVNA = ?
     WHERE ID_RC = ?;';
-$vals = array($_POST["rc"], $_POST["fname"],$_POST["surname"], $_POST["street"], $_POST["str_number"], $_POST["city"], $_POST["postal_code"], $b_date, $_POST["insurance"], $_POST["id_p"]);
+$vals = array($_POST["rc"], $_POST["fname"],$_POST["surname"], $_POST["street"], $_POST["str_number"], $_POST["city"], $_POST["postal_code"], $b_date, $_POST["mail"], $_POST["insurance"], $_POST["id_p"]);
 $q = $db->send_query($req, $vals);
 if(!$q->is_ok()){
     $_SESSION["error"] = "Změna údajů pacienta selhala";

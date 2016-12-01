@@ -47,6 +47,7 @@ include "header.php";
                         echo "</tr>";
                     }
                     echo '</table>';
+                    echo '<button onclick="window.print()">Tisk</button>' ;
                 }
                 else{
                     echo "<h2>Žádne záznamy pro uvedené období</h2>";

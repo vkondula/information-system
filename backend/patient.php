@@ -7,7 +7,7 @@ function get_patient_info($code){
     SELECT P.ID_RC AS  "rc", P.JMENO AS  "name", P.PRIJMENI AS  "surname",
     P.ULICE AS  "street", P.CISLO_POPISNE AS  "str_number", P.MESTO AS  "city",
     P.PSC AS  "postal_code", P.DATUM_NAROZENI AS  "birthdate", P.EVIDOVAN_OD AS  "evidence",
-    P.ID_POJISTOVNA AS  "insurance"   
+    P.ID_POJISTOVNA AS  "insurance", P.MAIL as "mail"  
     FROM PACIENT P
     WHERE P.ID_RC = ?;
     ';
@@ -19,7 +19,7 @@ function get_patient_info($code){
 function get_patients($name=null){
     if (!empty($name)){
         $req = '
-            SELECT P.ID_RC AS  "id", P.JMENO AS  "fname", P.PRIJMENI AS "surname"
+            SELECT P.ID_RC AS  "id", P.JMENO AS  "fname", P.PRIJMENI AS "surname", P.MAIL AS "mail"
             FROM PACIENT P
             WHERE P.PRIJMENI LIKE ?
             ORDER BY P.PRIJMENI ASC;
@@ -27,7 +27,7 @@ function get_patients($name=null){
         $vals = array("%".$name."%");
     } else {
         $req = '
-            SELECT P.ID_RC AS  "id", P.JMENO AS  "fname", P.PRIJMENI AS "surname"
+            SELECT P.ID_RC AS  "id", P.JMENO AS  "fname", P.PRIJMENI AS "surname", P.MAIL AS "mail"
             FROM PACIENT P ORDER BY P.PRIJMENI ASC, P.JMENO ASC;
          ';
         $vals = array();
