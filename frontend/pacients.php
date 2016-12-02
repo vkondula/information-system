@@ -64,17 +64,15 @@ require_once ("../backend/patient.php");
                     echo "<td>".$row["surname"]."</td>";
                     echo "<td>".$row["fname"]."</td>";
                     echo "<td>".$row["id"]."</td>";
-                    echo "<td><form action=\"mailto.php\" method=\"post\">
-                                <div>
+                    echo "<td>
+                             <form action=\"mailto.php\" method=\"post\">
                                     <input type=\"hidden\" name=\"address\" value=\"$add\">
                                     <button type=\"submit\">Poslat mail</button>
-                                </div>
                               </form>
                           </td>";
                     echo "</tr>";
                 }
                 ?>
-
             </table>
         </div>
     </div>

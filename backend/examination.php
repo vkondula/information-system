@@ -24,6 +24,21 @@ function get_examinations($name=null){
     return $q->get_data();
 }
 
+function get_examination_expirations(){
+    $req = '
+        SELECT DISTINCT P.jmeno AS "name", P.prijmeni AS "surname", P.mail AS "email", V.nazev_VYKONU AS  "exam"
+        FROM PACIENT P, TERMIN N, TERMIN_VYKON TV, VYKON V
+        WHERE N.id_pacient = P.id_rc AND TV.id_vykonu = V.id_vykonu AND TV.id_terminu = N.id_terminu AND 
+        EXTRACT(YEAR FROM N.datum_cas) < EXTRACT(YEAR FROM CURRENT_DATE) AND 
+        EXTRACT(MONTH FROM N.datum_cas) = EXTRACT(MONTH FROM CURRENT_DATE)
+        ';
+    $vals = array("%".$name."%");
+
+    $db = new Database();
+    $q = $db->send_query($req, $vals);
+    return $q->get_data();
+}
+
 
 function find_examination($name){
     $req = 'SELECT ID_VYKONU AS id_exam FROM VYKON WHERE NAZEV_VYKONU = ?';

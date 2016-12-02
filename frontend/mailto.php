@@ -10,7 +10,15 @@ include "header.php";
             <form action="../backend/save/send_mail_to.php" method="post">
                 <div>
                     <div><b>Predmet</b></div>
-                    <input name="subject" type="text" placeholder="Předmet" required>
+                    <?php
+                        if (isset($_POST["exam"]))
+                        {
+                            $val =$_POST["exam"];
+                            echo "<input name=\"subject\" type=\"text\" value=\"$val\" required>";
+                        }
+                        else
+                            echo "<input name=\"subject\" type=\"text\" placeholder=\"Předmet\" required>";
+                    ?>
                 </div>
                 <div>
                     <div><b>Správa</b></div>
