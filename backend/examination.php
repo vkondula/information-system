@@ -26,7 +26,7 @@ function get_examinations($name=null){
 
 function get_examination_expirations(){
     $req = '
-        SELECT DISTINCT P.jmeno AS "name", P.prijmeni AS "surname", P.mail AS "email", V.nazev_VYKONU AS  "exam"
+        SELECT DISTINCT P.jmeno AS "name", P.prijmeni AS "surname", P.mail AS "email", V.nazev_VYKONU AS "exam", P.id_rc as "id"
         FROM PACIENT P, TERMIN N, TERMIN_VYKON TV, VYKON V
         WHERE N.id_pacient = P.id_rc AND TV.id_vykonu = V.id_vykonu AND TV.id_terminu = N.id_terminu AND 
         EXTRACT(YEAR FROM N.datum_cas) < EXTRACT(YEAR FROM CURRENT_DATE) AND 
