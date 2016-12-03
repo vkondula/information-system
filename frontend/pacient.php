@@ -3,6 +3,7 @@ session_start();
 $title = "Pacienti";
 $id = $_GET["id"];
 require_once ("../backend/patient.php");
+require_once ("../backend/insurance.php");
 require_once ("visit.php");
 if(empty($id)) header("Location: pacients.php");
 $patients = get_patient_info($id);
@@ -71,7 +72,19 @@ include "header.php";
                             </div>
                             <div id="forms">
                                 <div><input class="left_input" type="text" name="rc" required value="<?php echo $patient["rc"]; ?>"></div>
-                                <div><input class="left_input" type="number" name="insurance" min="0" required value="<?php echo $patient["insurance"]; ?>"></div>
+                                <div>
+                                    <select class="left_input" name="insurance">
+                                        <?php
+                                        $insurance = get_insurance_comps();
+                                        foreach ($insurance as $row) {
+                                            if ($row["id"] === $patient["insurance"])
+                                                echo "<option selected=\"selected\" value=".$row["id"].">".$row["name"]."</option>";
+                                            else
+                                                echo "<option value=".$row["id"].">".$row["name"]."</option>";
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>

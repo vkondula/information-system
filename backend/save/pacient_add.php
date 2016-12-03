@@ -14,21 +14,28 @@ function go_back(){
 }
 
 if(!is_insurance_in_db($_POST["insurance"])){
+    $_POST["insurance"] = "";
+    $_SESSION["psaved"] = $_POST;
     $_SESSION["error"] = "Chybné číslo pojišťovny";
     go_back();
 }
 
 if(!is_rc_valid($_POST["rc"])){
+    $_POST["rc"] = "";
+    $_SESSION["psaved"] = $_POST;
     $_SESSION["error"] = "Invalidní rodné číslo";
     go_back();
 }
 
 if(!is_rc_uniq($_POST["rc"])){
+    $_POST["rc"] = "";
+    $_SESSION["psaved"] = $_POST;
     $_SESSION["error"] = "Pacient s tímto rodným číslem již existuje";
     go_back();
 }
 
 if(!is_all_set($_POST, ["fname","surname", "rc","insurance", "street", "str_number", "city", "mail", "postal_code"])){
+    $_SESSION["psaved"] = $_POST;
     $_SESSION["error"] = "Nebyly zadány všechny povinné položky";
     go_back();
 }
@@ -41,6 +48,8 @@ $req = 'INSERT INTO PACIENT VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 $vals = array($_POST["rc"], $_POST["fname"],$_POST["surname"], $_POST["street"], $_POST["str_number"], $_POST["city"], $_POST["postal_code"], $b_date, $_POST["mail"],date("Y-m-d"), $_POST["insurance"]);
 $q = $db->send_query($req, $vals);
 if($q->get_count() != 1){
+    $_SESSION["psaved"] = $_POST;
     $_SESSION["error"] = "Vytvoření nového pacienta selhalo";
 }
+$_SESSION["psaved"] = NULL;
 go_back();
