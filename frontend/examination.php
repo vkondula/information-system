@@ -23,8 +23,9 @@ include "header.php";
                 <hr/>
                 <form action="../backend/save/examination_add.php" method="post">
                     <div id="form-labels">
-                        <div class="form-label"><b>Název:</b></div>
-                        <div class="form-label"><b>Expirace:</b></div>
+                        <div class="form-label"><b>*Název:</b></div>
+                        <div class="form-label"><b>*Expirace:</b></div>
+                        <div class="form-label"><small>Položky s * jsou povinné</small></div>
                     </div>
                     <div id="forms">
                         <input class="left_input" type="text" name="name" required>

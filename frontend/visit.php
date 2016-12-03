@@ -11,7 +11,7 @@ function print_visit_info($v, $p){
             <div>
                 <div class="left">
                     <div id="form-labels">
-                        <div class="form-label"><b>Datum:</b></div>
+                        <div class="form-label"><b>*Datum:</b></div>
                     </div>
                     <div id="forms">
                         <div><input class="left_input" type="date" name="date" required value="<?php echo $v_date->format("Y-m-d"); ?>"></div>
@@ -19,7 +19,7 @@ function print_visit_info($v, $p){
                 </div>
                 <div class="right">
                     <div id="form-labels">
-                        <div class="form-label"><b>Čas:</b></div>
+                        <div class="form-label"><b>*Čas:</b></div>
                     </div>
                     <div id="forms">
                         <div><input class="left_input" type="time" name="time" required value="<?php echo $v_date->format("H:i:s"); ?>"></div>
@@ -140,9 +140,10 @@ function bill_form($v, $p){
         <hr/>
         <form action="../backend/save/visit_add_bill.php" method="post">
             <div id="form-labels">
-                <div class="form-label"><b>Datum:</b></div>
-                <div class="form-label"><b>Cena:</b></div>
-                <div class="form-label"><b>Doplatek:</b></div>
+                <div class="form-label"><b>*Datum:</b></div>
+                <div class="form-label"><b>*Cena:</b></div>
+                <div class="form-label"><b>*Doplatek:</b></div>
+                <div class="form-label"><small>Položky s * jsou povinné</small></div>
             </div>
             <div id="forms">
                 <div><input class="left_input" type="date" name="date" required value="<?php echo date("Y-m-d"); ?>"></div>
@@ -205,8 +206,9 @@ function drug_form($v, $p){
         <hr/>
         <form action="../backend/save/visit_add_drug.php" method="post">
             <div id="form-labels">
-                <div class="form-label"><b>Lék:</b></div>
-                <div class="form-label"><b>Počet balení:</b></div>
+                <div class="form-label"><b>*Lék:</b></div>
+                <div class="form-label"><b>*Počet balení:</b></div>
+                <div class="form-label"><small>Položky s * jsou povinné</small></div>
             </div>
             <div id="forms">
                 <div><input class="left_input" type="text" placeholder="Název léku" name="name" required></div>

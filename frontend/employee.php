@@ -28,10 +28,11 @@ $doc = whois_logged()->is_doctor();
                 <hr/>
                 <form action="../backend/save/emloyee_add.php" method="post">
                     <div id="form-labels">
-                        <div class="form-label"><b>Jméno:</b></div>
-                        <div class="form-label"><b>Příjmení:</b></div>
-                        <div class="form-label"><b>Email:</b></div>
-                        <div class="form-label"><b>Zařazení:</b></div>
+                        <div class="form-label"><b>*Jméno:</b></div>
+                        <div class="form-label"><b>*Příjmení:</b></div>
+                        <div class="form-label"><b>*Email:</b></div>
+                        <div class="form-label"><b>*Zařazení:</b></div>
+                        <div class="form-label"><small>Položky s * jsou povinné</small></div>
                     </div>
                     <div id="forms">
                         <input class="left_input" type="text" name="fname" required>

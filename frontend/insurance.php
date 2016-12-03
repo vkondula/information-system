@@ -23,8 +23,9 @@ require_once ("../backend/insurance.php");
             <hr/>
             <form action="../backend/save/insurance_add.php" method="post">
                 <div id="form-labels">
-                    <div class="form-label"><b>Číslo:</b></div>
-                    <div class="form-label"><b>Název:</b></div>
+                    <div class="form-label"><b>*Číslo:</b></div>
+                    <div class="form-label"><b>*Název:</b></div>
+                    <div class="form-label"><small>Položky s * jsou povinné</small></div>
                 </div>
                 <div id="forms">
                     <input class="left_input" type="number" min="0" name="id_ins" required>

@@ -9,7 +9,7 @@ include "header.php";
             <hr/>
             <form action="../backend/save/send_mail_to.php" method="post">
                 <div>
-                    <div><b>Predmet</b></div>
+                    <div><b>*Predmet</b></div>
                     <?php
                         if (isset($_POST["exam"]))
                         {
@@ -21,13 +21,14 @@ include "header.php";
                     ?>
                 </div>
                 <div>
-                    <div><b>Správa</b></div>
+                    <div><b>*Správa</b></div>
                     <textarea rows="10" cols="70" name="message" maxlength="2048" placeholder="Správa" required></textarea>
                 </div>
                 <div>
                     <input type="hidden" name="address" value="<?php echo $_POST["address"];?>">
                     <button type="submit" >Odeslat</button>
                 </div>
+                <div class="form-label"><small>Položky s * jsou povinné</small></div>
             </form>
         </div>
     </div>
