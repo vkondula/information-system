@@ -194,6 +194,26 @@ function drug_form($v, $p){
             $("drug_button").click(function(){       // listen for click
                 $("add_drug").toggle("fast");     // toggle when clicked
             });
+            $("#drug_box").on('keyup',function () {
+                var key = $(this).val();
+
+                $.ajax({
+                    url:'../backend/drug_search.php',
+                    type:'GET',
+                    data:'keyword='+key,
+                    success:function (data) {
+                        $("#d_results").html(data);
+                        $("#d_results").slideDown('fast');
+                        redefine();
+                    }
+                });
+            });
+            function redefine(){
+                $(".searchitem").click(function(){       // listen for click
+                    $("#drug_box").val($(this).text());
+                    $("#d_results").slideUp('fast');
+                });
+            }
         });
     </script>
     <div>
@@ -211,7 +231,8 @@ function drug_form($v, $p){
                 <div class="form-label"><small>Položky s * jsou povinné</small></div>
             </div>
             <div id="forms">
-                <div><input class="left_input" type="text" placeholder="Název léku" name="name" required></div>
+                <div><input class="left_input" type="text" placeholder="Název léku" name="name" required id="drug_box" autocomplete="off"></div>
+                <div id="d_results"></div>
                 <div><input class="left_input" type="number" name="number" min="1" required value="1"></div>
                 <div>
                     <input  type="hidden" name="id_v" value="<?php echo $v; ?>">
@@ -259,8 +280,29 @@ function examination_form($v, $p){
             $("examination_button").click(function(){       // listen for click
                 $("add_examination").toggle("fast");     // toggle when clicked
             });
+          $("#examination_box").on('keyup',function () {
+                var key = $(this).val();
+
+                $.ajax({
+                    url:'../backend/exam_search.php',
+                    type:'GET',
+                    data:'keyword='+key,
+                    success:function (data) {
+                        $("#e_results").html(data);
+                        $("#e_results").slideDown('fast');
+                        redefine();
+                    }
+                });
+            });
+            function redefine(){
+                $(".searchitem").click(function(){       // listen for click
+                    $("#examination_box").val($(this).text());
+                    $("#e_results").slideUp('fast');
+                });
+            }
         });
     </script>
+
     <div>
         <examination_button>
             <button class="add_new">Přidat výkon</button>
@@ -272,10 +314,13 @@ function examination_form($v, $p){
         <hr/>
         <form action="../backend/save/visit_add_examination.php" method="post">
             <div id="form-labels">
-                <div class="form-label"><b>Název Výkonu:</b></div>
+                <div class="form-label"><b>*Název Výkonu:</b></div>
             </div>
             <div id="forms">
-                <div><input class="left_input" type="text" placeholder="Název výkonu" name="name" required></div>
+                <div>
+                    <input class="left_input" type="text" placeholder="Název výkonu" name="name" required id="examination_box" autocomplete="off">
+                </div>
+                <div id="e_results"></div>
                 <div>
                 <input type="hidden" name="id_v" value="<?php echo $v; ?>">
                 <input type="hidden" name="id_p" value="<?php echo $p; ?>">

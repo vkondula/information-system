@@ -49,7 +49,7 @@ body {
     display: none;
 }
 
-.submenu_item {
+.submenu_item{
     height: 40px;
     font-size: 0.75em;
     padding-left: 20px;
@@ -61,6 +61,26 @@ body {
     border-style: solid;
     border-color: #ffffff;
     border-width: 2px;
+}
+
+.searchitem {
+    background-color: #1391EA;
+    color: #ffffff;
+    border-style: solid;
+    border-color: #ffffff;
+    border-width: 1px;
+
+}
+
+#d_results, #e_results {
+    position:absolute;
+    width: 250px;
+    z-index:99;
+}
+
+.searchitem:hover {
+    background-color: #c0e4fe;
+    color: black;
 }
 
 #submenu a:hover {
