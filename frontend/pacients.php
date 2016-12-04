@@ -19,6 +19,28 @@ if (!isset($_SESSION['psaved'])){
     <div class="site">
         <div class="content">
             <div>
+                <script>
+                    $(document).ready(function(){
+                        $("#search").on('keyup',function () {
+                            var key = $(this).val();
+                            if (key.length === 0)
+                                $("static_table").show();
+                            else
+                                $("static_table").hide();
+                            $.ajax({
+                                url:'../backend/pacient_search.php',
+                                type:'GET',
+                                data:'keyword='+key,
+                                success:function (data) {
+                                    $("dinamic_table").html(data);
+                                    $("dinamic_table").slideDown('fast');
+                                    redefine();
+                                }
+                            });
+                        });
+                    });
+                </script>
+
                 <h1>Pacienti</h1>
                 <add_patient>
                     <button class="add_new">Přidat nového pacienta</button>
@@ -66,31 +88,37 @@ if (!isset($_SESSION['psaved'])){
                     </div>
                 </form>
             </add_form>
-            <table>
-                <tr>
-                    <th>Příjmení</th>
-                    <th>Jméno</th>
-                    <th>Rodné číslo</th>
-                    <th>Kontakt</th>
-                </tr>
-                <?php
-                $pacients = get_patients();
-                foreach ($pacients as $row) {
-                    $add = $row["mail"];
-                    echo "<tr class=\"patient_row\" onclick=\"window.document.location='pacient.php?id=".$row["id"]."';\">";
-                    echo "<td>".$row["surname"]."</td>";
-                    echo "<td>".$row["fname"]."</td>";
-                    echo "<td>".$row["id"]."</td>";
-                    echo "<td>
-                             <form action=\"mailto.php\" method=\"post\">
-                                    <input type=\"hidden\" name=\"address\" value=\"$add\">
-                                    <button type=\"submit\">Poslat mail</button>
-                              </form>
-                          </td>";
-                    echo "</tr>";
-                }
-                ?>
-            </table>
+            <div>
+                <input class="left_input" type="text" placeholder="Zadajte příjmení" name="name" id="search" autocomplete="off">
+            </div>
+            <dinamic_table></dinamic_table>
+            <static_table>
+                <table>
+                    <tr>
+                        <th>Příjmení</th>
+                        <th>Jméno</th>
+                        <th>Rodné číslo</th>
+                        <th>Kontakt</th>
+                    </tr>
+                    <?php
+                    $pacients = get_patients();
+                    foreach ($pacients as $row) {
+                        $add = $row["mail"];
+                        echo "<tr class=\"patient_row\" onclick=\"window.document.location='pacient.php?id=".$row["id"]."';\">";
+                        echo "<td>".$row["surname"]."</td>";
+                        echo "<td>".$row["fname"]."</td>";
+                        echo "<td>".$row["id"]."</td>";
+                        echo "<td>
+                                 <form action=\"mailto.php\" method=\"post\">
+                                        <input type=\"hidden\" name=\"address\" value=\"$add\">
+                                        <button type=\"submit\">Poslat mail</button>
+                                  </form>
+                              </td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </table>
+                <static_table>
         </div>
     </div>
 <?php
