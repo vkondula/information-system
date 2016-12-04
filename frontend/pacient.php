@@ -4,10 +4,11 @@ $title = "Pacienti";
 $id = $_GET["id"];
 require_once ("../backend/patient.php");
 require_once ("../backend/insurance.php");
-require_once ("visit.php");
 if(empty($id)) header("Location: pacients.php");
+
 $patients = get_patient_info($id);
 if (count($patients) == 0) header("Location: pacients.php");
+require_once ("visit.php");
 $patient = $patients[0];
 include "header.php";
 ?>

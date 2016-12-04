@@ -155,6 +155,7 @@ function bill_form($v, $p){
                 <input type="hidden" name="id_p" value="<?php echo $p; ?>">
                 <button id="save₋3" type="submit">Uložit</button>
             </div>
+        </form>
     </add_bill>
 <?php
 }
