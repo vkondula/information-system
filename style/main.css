@@ -120,8 +120,8 @@ body {
 .left_input {
     border-width: 2px;
     border-color: #1391EA;
-    margin: 5px;
-    height: 20px;
+    margin: 1px;
+    height: 24px;
     width: 90%;
     text-align: left;
     color: #444;
@@ -266,7 +266,7 @@ button {
 }
 
 .form-label{
-    margin: 10px;
+    margin: 7px;
     height: 25px;
 }
 
